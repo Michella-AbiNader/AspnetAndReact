@@ -3,9 +3,6 @@ using AspnetAndReact.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
-using System.Net;
-using System.Reflection;
-using System.Text;
 using System.Web.Http;
 
 namespace AspnetAndReact.Server.Controllers
@@ -22,12 +19,12 @@ namespace AspnetAndReact.Server.Controllers
             string query = "SELECT * FROM users";
             SqlOperations sql = new SqlOperations();
             var response = sql.sqlToDataTable(query);
-            DataTable users = response.dt;
-            if(!response.isSuccess)
+            DataTable dataTable = response.dt;
+            if(!response.isSuccess || dataTable.Rows.Count == 0)
             {
                 return "No users found";
             }
-           string students = sql.DataTableToJsonObj(users);
+           string students = sql.DataTableToJsonObj(dataTable);
             return students;
         }
 
@@ -38,14 +35,31 @@ namespace AspnetAndReact.Server.Controllers
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@id", id);
             var response = sql.sqlToDataTable(query, sqlParam);
-            DataTable user = response.dt;
-            if(!response.isSuccess)
+            DataTable dataTable = response.dt;
+            if(response.isSuccess == false || dataTable.Rows.Count == 0)
             {
                 return "User doesn't exist";
             }
-            string result = sql.DataTableToJsonObj(user);
+            string result = sql.DataTableToJsonObj(dataTable);
             return result;
         }
+
+        [Microsoft.AspNetCore.Mvc.HttpGetAttribute]
+        public string GetType(int id)
+        {
+            string query = "SELECT type FROM users WHERE id = @id";
+            SqlOperations sql = new SqlOperations();
+            SqlParameter sqlParam = new SqlParameter("@id", id);
+            var response = sql.sqlToDataTable(query, sqlParam);
+            DataTable dataTable = response.dt;
+            if (!response.isSuccess || dataTable.Rows.Count == 0)
+            {
+                return "User doesn't exist";
+            }
+            string result = sql.DataTableToJsonObj(dataTable);
+            return result;
+        }
+
 
         [Microsoft.AspNetCore.Mvc.HttpPostAttribute]
         public string Post([System.Web.Http.FromBody] User user)
@@ -82,7 +96,7 @@ namespace AspnetAndReact.Server.Controllers
             sql.executeSql(query, parameters);
             if(!isSuccess)
             {
-                return "Wrong input provided";
+                return "Username already exists";
             }
             return "User added successfully!";
         }
@@ -133,7 +147,11 @@ namespace AspnetAndReact.Server.Controllers
             string query = "DELETE FROM users WHERE id = @id";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@id", id);
-            sql.executeSql(query, sqlParam);
+            bool result = sql.executeSql(query, sqlParam);
+            if (!result)
+            {
+                return "Wrong Id provided!";
+            }
             return "User deleted successfully!";
         }
 

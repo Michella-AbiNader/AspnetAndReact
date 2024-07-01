@@ -6,7 +6,6 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Web.Http.Controllers;
 using System.Security.Cryptography;
-using AspnetAndReact.Server.Functions;
 
 namespace AspnetAndReact.Server.Functions
 {
@@ -81,10 +80,10 @@ namespace AspnetAndReact.Server.Functions
             }
         }
 
-        public (bool verified, string token) VerifyUser(String username, string password)
+        public (bool verified, string token, string type) VerifyUser(string username, string password)
         {
             SqlOperations sql = new SqlOperations();
-            string query = "SELECT TOP(1) token FROM user WHERE useranme = @useranme AND password = @password";
+            string query = "SELECT TOP(1) token, type FROM users WHERE username = @username AND password = @password";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter ("@username", username),
@@ -94,9 +93,10 @@ namespace AspnetAndReact.Server.Functions
             if (tokenDt != null && tokenDt.Rows.Count > 0)
             {
                 string token = tokenDt.Rows[0]["token"].ToString();
-                return (true, token);
+                string type = tokenDt.Rows[0]["type"].ToString();
+                return (true, token, type);
             }
-            return (false, "");
+            return (false, "", "");
         }
 
     }

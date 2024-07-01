@@ -56,7 +56,15 @@ export default defineConfig({
                 //    'Content-Type': 'application/json'
                 //},
                 //body: JSON.stringify({ key: 'value' })
-            }
+            },
+            '^/Auth': {
+                target: 'https://localhost:7031/',
+                secure: false,
+            },
+            '^/Category': {
+                target: 'https://localhost:7031/',
+                secure: false,
+            },
         },
         port: 5173,
         https: {

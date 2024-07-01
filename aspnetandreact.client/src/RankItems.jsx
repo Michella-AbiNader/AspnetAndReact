@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 const RankItems = () => {
     const [items, setItems] = useState([]);
     useEffect(() => {
-        fetch(`/User`)
+        fetch(`/User/Get`)
             .then((result) => {
                 if (result.ok) {
                     return result.json();
