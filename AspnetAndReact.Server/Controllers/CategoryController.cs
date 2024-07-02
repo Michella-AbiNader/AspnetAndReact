@@ -1,6 +1,5 @@
 ﻿using AspnetAndReact.Server.Functions;
 using AspnetAndReact.Server.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
@@ -45,7 +44,6 @@ namespace AspnetAndReact.Server.Controllers
             return "Category added successfully!";
         }
 
-        // POST: CategoryController/Create
         [HttpPut]
         public string Put(int id, [FromBody] Category category)
         {
