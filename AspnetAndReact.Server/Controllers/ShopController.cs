@@ -8,71 +8,69 @@ namespace AspnetAndReact.Server.Controllers
 {
     [ApiController]
     [RouteAttribute("/[controller]/[action]")]
-    public class ProductController : ControllerBase
+    public class ShopController : ControllerBase
     {
         [HttpGet]
         public string Get()
         {
-            string query = "SELECT * FROM products";
+            string query = "SELECT * FROM shops";
             SqlOperations sql = new SqlOperations();
             var response = sql.sqlToDataTable(query);
             DataTable dataTable = response.dt;
             if (!response.isSuccess || dataTable.Rows.Count == 0)
             {
-                return "No products found";
+                return "No shops found";
             }
-            string products = sql.DataTableToJsonObj(dataTable);
-            return products;
+            string shops = sql.DataTableToJsonObj(dataTable);
+            return shops;
         }
         [HttpGet]
         public string GetById(int id)
         {
-            string query = "SELECT * FROM products WHERE id = @id";
+            string query = "SELECT * FROM shops WHERE id = @id";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@id", id);
             var response = sql.sqlToDataTable(query, sqlParam);
             DataTable dataTable = response.dt;
             if (response.isSuccess == false || dataTable.Rows.Count == 0)
             {
-                return "Product doesn't exist";
+                return "Shop doesn't exist";
             }
             string result = sql.DataTableToJsonObj(dataTable);
             return result;
         }
-
         [HttpGet]
-        public string GetByShop(int shopId)
+        public string GetByUserId(int userId)
         {
-            string query = "SELECT * FROM products WHERE shop_id = @shopId";
+            string query = "SELECT * FROM shops WHERE user_id = @userId";
             SqlOperations sql = new SqlOperations();
-            SqlParameter sqlParam = new SqlParameter("@shopId", shopId);
+            SqlParameter sqlParam = new SqlParameter("@userId", userId);
             var response = sql.sqlToDataTable(query, sqlParam);
             DataTable dataTable = response.dt;
             if (response.isSuccess == false || dataTable.Rows.Count == 0)
             {
-                return "Product doesn't exist";
+                return "This user is not a shop owner";
             }
             string result = sql.DataTableToJsonObj(dataTable);
             return result;
         }
-
         [HttpGet]
-        public string GetByCategory(int categoryId)
+        public string GetByCategory(string category)
         {
-            string query = "SELECT * FROM products WHERE category_id = @categoryId";
+            string query = "SELECT * FROM shops WHERE category = @category";
             SqlOperations sql = new SqlOperations();
-            SqlParameter sqlParam = new SqlParameter("@categoryId", categoryId);
+            SqlParameter sqlParam = new SqlParameter("@category", category);
             var response = sql.sqlToDataTable(query, sqlParam);
             DataTable dataTable = response.dt;
             if (response.isSuccess == false || dataTable.Rows.Count == 0)
             {
-                return "Product doesn't exist";
+                return "No shops found!";
             }
             string result = sql.DataTableToJsonObj(dataTable);
             return result;
         }
         [HttpGet]
-        public string GetBySearch(string search ="")
+        public string GetBySearch(string search)
         {
             string query = "SELECT * FROM products WHERE name LIKE %@search%";
             SqlOperations sql = new SqlOperations();
@@ -81,51 +79,45 @@ namespace AspnetAndReact.Server.Controllers
             DataTable dataTable = response.dt;
             if (response.isSuccess == false || dataTable.Rows.Count == 0)
             {
-                return "Product doesn't exist";
+                return "Shop doesn't exist";
             }
             string result = sql.DataTableToJsonObj(dataTable);
             return result;
         }
-
-
         [HttpPost]
-        public string Post([FromBody] Product product)
+        public string Post([FromBody] Shop shop)
         {
-            string query = "INSERT INTO produts(name, description, price, quantity, image_url, shop_id, category_id)" +
-                "VALUES(@name, @description, @price, @quantity, @image_url, @shop_id, @category_id);";
+            string query = "INSERT INTO shops(name, category, image_url, theme-color, user_id)" +
+                "VALUES(@name, @category, @image_url, @theme_color, @user_id);";
             SqlParameter[] sqlParameters = new SqlParameter[]
            {
-               new SqlParameter("@name", product.Name),
-               new SqlParameter("@description", product.Description),
-               new SqlParameter("@price", product.Price),
-               new SqlParameter("@quantity", product.Quantity),
-               new SqlParameter("@image_url", product.ImageUrl),
-               new SqlParameter("@shop_id", product.ShopId),
-               new SqlParameter("@category_id", product.CategoryId),
+               new SqlParameter("@name", shop.Name),
+               new SqlParameter("@category", shop.Category),
+               new SqlParameter("@image_url", shop.ImageUrl),
+               new SqlParameter("@theme_color", shop.ThemeColor),
+               new SqlParameter("@user_id", shop.UserId)
            };
             SqlOperations sql = new SqlOperations();
             var result = sql.executeSql(query, sqlParameters);
             if (!result)
             {
-                return "Product already exists";
+                return "Shop already exists";
             }
-            return "Product added successfully!";
+            return "Shop added successfully!";
         }
         [HttpPut]
-        public string Put(int id, [FromBody] Product product)
+        public string Put(int id, [FromBody] Shop shop)
         {
-            string query = "UPDATE products SET name = @name, description = @description, price = @price, " +
-                "quantity = @qunatity, image_url = @image_url, category_id = @category_id WHERE id = @id;";
+            string query = "UPDATE shops SET name = @name, category = @category, image_url = @image_url, " +
+                "theme-color = @theme_color WHERE id = @id;";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
                {
                 new SqlParameter("@id", id),
-                new SqlParameter("@name", product.Name),
-                new SqlParameter("@description", product.Description),
-                new SqlParameter("@price", product.Price),
-                new SqlParameter("@quantity", product.Quantity),
-                new SqlParameter("@image_url", product.ImageUrl),
-                new SqlParameter("@category_id", product.CategoryId)
+                new SqlParameter("@name", shop.Name),
+                new SqlParameter("@description", shop.Category),
+                new SqlParameter("@image_url", shop.ImageUrl),
+                new SqlParameter("@theme_color", shop.ThemeColor)
                };
             SqlOperations sql = new SqlOperations();
             bool result = sql.executeSql(query, sqlParameters);
@@ -133,22 +125,20 @@ namespace AspnetAndReact.Server.Controllers
             {
                 return "Wrong id or input provided";
             }
-            return "Product updated successfully!";
+            return "Shop updated successfully!";
         }
-
         [HttpDelete]
         public string Delete(int id)
         {
-            string query = "DELETE FROM products WHERE id = @id";
+            string query = "DELETE FROM shops WHERE id = @id";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@id", id);
             bool result = sql.executeSql(query, sqlParam);
             if (result)
             {
-                return "Product deleted successfully!";
+                return "Shop deleted successfully!";
             }
             return "Wrong Id provided";
         }
-
     }
 }

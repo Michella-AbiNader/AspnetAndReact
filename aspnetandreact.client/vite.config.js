@@ -68,6 +68,10 @@ export default defineConfig({
             '^/Product': {
                 target: 'https://localhost:7031/',
                 secure: false,
+            },
+            '^/Shop': {
+                target: 'https://localhost:7031/',
+                secure: false,
             }
         },
         port: 5173,
