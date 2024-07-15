@@ -72,6 +72,14 @@ export default defineConfig({
             '^/Shop': {
                 target: 'https://localhost:7031/',
                 secure: false,
+            },
+            '^/Cart': {
+                target: 'https://localhost:7031/',
+                secure: false,
+            },
+            '^/Order': {
+                target: 'https://localhost:7031/',
+                secure: false,
             }
         },
         port: 5173,
