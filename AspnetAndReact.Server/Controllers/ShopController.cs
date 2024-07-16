@@ -87,7 +87,7 @@ namespace AspnetAndReact.Server.Controllers
         [HttpPost]
         public string Post([FromBody] Shop shop)
         {
-            string query = "INSERT INTO shops(name, category, image_url, theme-color, user_id)" +
+            string query = "INSERT INTO shops(name, category, image_url, theme_color, user_id)" +
                 "VALUES(@name, @category, @image_url, @theme_color, @user_id);";
             SqlParameter[] sqlParameters = new SqlParameter[]
            {
@@ -109,7 +109,7 @@ namespace AspnetAndReact.Server.Controllers
         public string Put(int id, [FromBody] Shop shop)
         {
             string query = "UPDATE shops SET name = @name, category = @category, image_url = @image_url, " +
-                "theme-color = @theme_color WHERE id = @id;";
+                "theme_color = @theme_color WHERE id = @id;";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
                {

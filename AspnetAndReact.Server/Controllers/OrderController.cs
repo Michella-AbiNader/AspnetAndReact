@@ -15,9 +15,10 @@ namespace AspnetAndReact.Server.Controllers
         public string Get(int shopId)
         {
             //join tables to get the name and priceof the product an dshow the name and the quantity and the amout
-            string query = "SELECT name, price, SUM(quantity.order) FROM order JOIN products " +
-                "ON order.product_id = products.id" +
-                " WHERE shop_id = @shopId GROUP BY product_id";
+            string query = "SELECT product_id, name, price, SUM([orders].quantity) AS total_quantity, SUM(orders.quantity * price) AS total " +
+                " FROM [orders] JOIN products " +
+                "ON [orders].product_id = products.id" +
+                " WHERE [orders].shop_id = @shopId GROUP BY product_id, name, price";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@shopId", shopId);
             var response = sql.sqlToDataTable(query, sqlParam);
@@ -34,8 +35,10 @@ namespace AspnetAndReact.Server.Controllers
         public string GetOrder(int shopId)
         {
             //join tables to get the name and priceof the product an dshow the name and the quantity and the amout
-            string query = "SELECT username, location, name, quantity.order, price, status FROM order, users, products" +
-                " WHERE order.user_id = users.id And order.product_id = products.id;";
+            string query = "SELECT username, location, name, [orders].quantity, price, status, SUM(orders.quantity * price) AS total " +
+                "FROM [orders], users, products" +
+                " WHERE [orders].user_id = users.id And [orders].product_id = products.id AND [orders].shop_id = @shopId " +
+                "ORDER BY username;";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@shopId", shopId);
             var response = sql.sqlToDataTable(query, sqlParam);
@@ -50,7 +53,7 @@ namespace AspnetAndReact.Server.Controllers
         [HttpPost]
         public string Post([FromBody] Order order)
         {
-            string query = "INSERT INTO order (user_id, product_id, shop_id, quantity, location, date_of_order, status) " +
+            string query = "INSERT INTO orders (user_id, product_id, shop_id, quantity, location, date_of_order, status) " +
                 "VALUES(@user_id, @product_id, @shop_id, @quantity, @location, @date_of_order, @status);";
             SqlParameter[] sqlParameters = new SqlParameter[]
            {
@@ -74,7 +77,7 @@ namespace AspnetAndReact.Server.Controllers
         //Update the status of the order
         public string Put(string status, int id)
         {
-            string query = "UPDATE order SET status = @status WHERE id = @id ;";
+            string query = "UPDATE orders SET status = @status WHERE id = @id ;";
             SqlParameter[] sqlParameters = new SqlParameter[]
            {
                new SqlParameter("@status", status),
@@ -84,10 +87,9 @@ namespace AspnetAndReact.Server.Controllers
             var result = sql.executeSql(query, sqlParameters);
             if (!result)
             {
-                //send a query to update the quantity where product id and user id are not unique put
-                return "Can't add item to cart";
+                return "Can't update order";
             }
-            return "Item added to cart successfully!";
+            return "Order updated successfully!";
         }
 
         [HttpDelete]

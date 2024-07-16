@@ -13,7 +13,8 @@ namespace AspnetAndReact.Server.Controllers
         [HttpGet]
         public string Get(int userId)
         {
-            string query = "SELECT * FROM cart WHERE user_id = @userId";
+            string query = "SELECT  products.name, products.price, products.image_url, cart.quantity " +
+                "FROM products JOIN cart ON cart.product_id = products.id WHERE cart.user_id = @userId";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@userId", userId);
             var response = sql.sqlToDataTable(query, sqlParam);
@@ -29,11 +30,9 @@ namespace AspnetAndReact.Server.Controllers
         //Add new item to cart and incrments te quantity if item is already in cart
         public string Post([FromBody] Cart cart)
         {
-            string query = "IF NOT EXISTS (SELECT 1 FROM cart WHERE user_id = @user_id AND product_id = @product_id " +
-                "INSERT INTO cart(user_id, product_id, shop_id, quantity) " +
-                "VALUES(@user_id, @product_id, @shop_id, @quantity) " +
-                "IF EXISTS (SELECT 1 FROM cart WHERE user_id = @user_id AND product_id = @product_id " +
-                "UPDATE cart SET quantity = quantity + 1 WHERE user_id = @user_id AND product_id = @product_id;";
+            string query = "INSERT INTO cart(user_id, product_id, shop_id, quantity) " +
+                "VALUES(@user_id, @product_id, @shop_id, @quantity); ";
+                
             SqlParameter[] sqlParameters = new SqlParameter[]
            {
                new SqlParameter("@user_id", cart.UserId),
@@ -43,10 +42,21 @@ namespace AspnetAndReact.Server.Controllers
            };
             SqlOperations sql = new SqlOperations();
             var result = sql.executeSql(query, sqlParameters);
+            //if row already exists in cart, increase the quantity by 1
             if (!result)
             {
-                //send a query to update the quantity where product id and user id are not unique put
-                return "Can't add item to cart";
+                string newQuery = "UPDATE cart SET quantity = quantity + 1 " +
+                    "WHERE user_id = @user_id AND product_id = @product_id;";
+                SqlParameter[] sqlParam = new SqlParameter[]
+                {
+                    new SqlParameter("@user_id", cart.UserId),
+                    new SqlParameter("@product_id", cart.ProductId),
+                    new SqlParameter("@shop_id", cart.ShopId),
+                    new SqlParameter("@quantity", cart.Quantity)
+                };
+                SqlOperations sqlOp = new SqlOperations();
+                var newResult = sqlOp.executeSql(newQuery, sqlParam);
+                return "Quantity updated";
             }
             return "Item added to cart successfully!";
         }

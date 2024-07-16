@@ -91,8 +91,8 @@ namespace AspnetAndReact.Server.Controllers
         [HttpPost]
         public string Post([FromBody] Product product)
         {
-            string query = "INSERT INTO produts(name, description, price, quantity, image_url, shop_id, category_id)" +
-                "VALUES(@name, @description, @price, @quantity, @image_url, @shop_id, @category_id);";
+            string query = "INSERT INTO products (name, description, price, quantity, image_url, shop_id, category_id) " +
+                "VALUES (@name, @description, @price, @quantity, @image_url, @shop_id, @category_id);";
             SqlParameter[] sqlParameters = new SqlParameter[]
            {
                new SqlParameter("@name", product.Name),
