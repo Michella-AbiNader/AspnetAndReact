@@ -1,8 +1,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import '../Styles/Login.css'
 import { loginUser } from '../Services/LoginRegister'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import UserContext from '../Components/UserContext'
 
 
 function Login() {
@@ -11,13 +12,26 @@ function Login() {
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const [response, setresponse] = useState({})
+
+	const { setUser } = useContext(UserContext);
 	const navigate = useNavigate();
+
 	const handleSubmit = async (e) => {
 		var res;
 		e.preventDefault();
 		try {
 			res = await loginUser(username, password);
 			console.log(res)
+			if (res.type !== "") {
+				setUser({ id: res.id, username: username, token: res.token, type: res.type })
+				if (res.type == "admin") {
+					navigate('/SystemAdminDashboard');
+				} else if (res.type == "shop admin") {
+					navigate('/adminDashboard')
+				} else if (res.type == "user") {
+					navigate('/app')
+				}
+			}
 		} catch (error) {
 			console.log(error)
 		}
@@ -50,7 +64,7 @@ function Login() {
 						required
 						value={password }
 						onChange={(e) => setPassword(e.target.value)} />
-					{response.res == false ? <p className="error">Wrong password or useranme</p>: "" }
+					{response.token == ""? <p className="error"> Wrong useranme or password</p>: "" }
 					<button className="loginbtn" type='submit'>Login</button>
 					<p>Don't have an account?
 						<a onClick={handleRegisterClick}> Sign up for free</a>

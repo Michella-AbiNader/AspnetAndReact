@@ -28,6 +28,8 @@ namespace AspnetAndReact.Server.Controllers
             {
                 var response = new 
                 {
+                    id = result.id,
+                    username = username,
                     res = result.verified,
                     token = result.token,
                     type = result.type
@@ -36,6 +38,8 @@ namespace AspnetAndReact.Server.Controllers
             }
             var response2 = new
             {
+                id = result.id,
+                username = username,
                 res = result.verified,
                 token = result.token,
                 type = result.type

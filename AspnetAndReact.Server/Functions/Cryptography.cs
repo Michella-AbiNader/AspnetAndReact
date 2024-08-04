@@ -80,10 +80,10 @@ namespace AspnetAndReact.Server.Functions
             }
         }
 
-        public (bool verified, string token, string type) VerifyUser(string username, string password)
+        public (bool verified, string id, string token, string type) VerifyUser(string username, string password)
         {
             SqlOperations sql = new SqlOperations();
-            string query = "SELECT TOP(1) token, type FROM users WHERE username = @username AND password = @password";
+            string query = "SELECT TOP(1) id, token, type FROM users WHERE username = @username AND password = @password";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter ("@username", username),
@@ -92,11 +92,12 @@ namespace AspnetAndReact.Server.Functions
             DataTable tokenDt = (sql.sqlToDataTable(query, parameters)).dt;
             if (tokenDt != null && tokenDt.Rows.Count > 0)
             {
+                string id = tokenDt.Rows[0]["id"].ToString();
                 string token = tokenDt.Rows[0]["token"].ToString();
                 string type = tokenDt.Rows[0]["type"].ToString();
-                return (true, token, type);
+                return (true, id, token, type);
             }
-            return (false, "", "");
+            return (false, "", "", "");
         }
 
     }
