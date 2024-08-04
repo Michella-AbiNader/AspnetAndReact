@@ -59,7 +59,7 @@ export default defineConfig({
             },
             '^/Auth': {
                 target: 'https://localhost:7031/',
-                secure: false,
+                secure: false
             },
             '^/Category': {
                 target: 'https://localhost:7031/',

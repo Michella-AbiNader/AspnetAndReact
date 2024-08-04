@@ -18,6 +18,7 @@ const RankItems = () => {
 
     return (
         <div>Loading...
+        <input type="text"></input>
             {
                 (items.length > 0) ? items.map((item) => <li key={item.Id}>{item.username}, {item.first_name}, {item.password}</li>) : <div>Loading...</div>
             }
