@@ -1,28 +1,37 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import '../Styles/Register.css'
+import { useNavigate } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react'
+import UserContext from '../Components/UserContext'
+
+
 
 function Register() {
-	//gather the input and send it to the database
-	//javascript function to check password strength
+	const [username, setUsername] = useState('')
+	const [password, setPassword] = useState('')
+	const [response, setresponse] = useState({})
+
+	const { setUser } = useContext(UserContext);
+
+	const navigate = useNavigate();
+
+	const handleRegisterClick = () => {
+		navigate('/');
+	}
+
 	return (
-		<div className="main">
-			<input type="checkbox" id="chk" aria-hidden="true" />
-			<div className="signup">
+		<div >
+			<div className="rcontainer">
+		<h3 className="rheader">Register</h3>
 				<form>
-					<label htmlFor="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="txt" placeholder="User name" required />
-					<input type="text" name="txt" placeholder="First name" required />
-					<input type="text" name="txt" placeholder="Last name" required />
-					<input type="password" name="pswd" placeholder="Password" required />
+					<input className="input" type="text" name="txt" placeholder="User name" required />
+					<input className="input" type="text" name="txt" placeholder="First name" required />
+					<input className="input" type="text" name="txt" placeholder="Last name" required />
+					<input className="input" type="password" name="pswd" placeholder="Password" required />
 					<button className="singupBtn">Sign up</button>
-				</form>
-			</div>
-			<div className="login">
-				<form>
-					<label htmlFor="chk" aria-hidden="true">Login</label>
-					<input type="text" name="txt" placeholder="User name" required />
-					<input type="password" name="pswd" placeholder="Password" required />
-					<button className="singupBtn">Login</button>
+					<p>Already have an account?
+						<a onClick={handleRegisterClick }> Login</a>
+					</p>
 				</form>
 			</div>
 			<div className="screen__background">

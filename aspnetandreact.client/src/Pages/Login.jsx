@@ -1,7 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import '../Styles/Login.css'
 import { loginUser } from '../Services/LoginRegister'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../Components/UserContext'
 
@@ -37,20 +37,17 @@ function Login() {
 		}
 		setresponse(res)
 	}
-	useEffect(() => {
-		console.log('Updated response:', response);
-	}, [response]);
 
 	const handleRegisterClick = () => {
 		navigate('/register');
 	}
 
 	return (
-		<div className="container">
-			<div className="login">
+		<div>
+			<div className="container">
 			<h3 className="header">Login</h3>
 				<form onSubmit={handleSubmit }>
-					<input type="text"
+					<input className="input" type="text"
 						name="txt"
 						placeholder="User name"
 						required
@@ -58,7 +55,7 @@ function Login() {
 						onChange={(e) => setUsername(e.target.value)}
 						 />
 
-					<input type="password"
+					<input className="input" type="password"
 						name="pswd"
 						placeholder="Password"
 						required
@@ -79,7 +76,6 @@ function Login() {
 				<span className="screen__background__shape screen__background__shape6"></span>
 				<span className="screen__background__shape screen__background__shape7"></span>
 			</div>
-
 		</div>
 
 	);
