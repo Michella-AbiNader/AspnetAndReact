@@ -1,6 +1,13 @@
+import { Link } from 'react-router-dom'
+
 function SystemAdminNavbar() {
   return (
-    <p>Hello world!</p>
+      <div className="Navbar-Container">
+          <ul>
+            
+          </ul>
+      </div> 
+
   );
 }
 

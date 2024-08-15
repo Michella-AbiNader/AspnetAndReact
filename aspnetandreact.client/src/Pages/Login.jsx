@@ -25,7 +25,7 @@ function Login() {
 			if (res.type !== "") {
 				setUser({ id: res.id, username: username, token: res.token, type: res.type })
 				if (res.type == "admin") {
-					navigate('/SystemAdminDashboard');
+					navigate('/system-admin/dashboard');
 				} else if (res.type == "shop admin") {
 					navigate('/adminDashboard')
 				} else if (res.type == "user") {
@@ -64,7 +64,7 @@ function Login() {
 					{response.token == ""? <p className="error"> Wrong useranme or password</p>: "" }
 					<button className="loginbtn" type='submit'>Login</button>
 					<p>Don't have an account?
-						<a onClick={handleRegisterClick}> Sign up for free</a>
+						<a className="link" onClick={handleRegisterClick}> Sign up for free</a>
 					</p>
 				</form>
 			</div>

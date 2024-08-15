@@ -102,13 +102,13 @@ p {
     text-align: center;
 }
 
-a {
+.link {
     color: var(--button-color);
     text-decoration: none;
     cursor: pointer;
 }
 
-    a:hover {
+    .link:hover {
         color: var(--button-onHover);
         text-decoration: underline;
     }

@@ -1,0 +1,19 @@
+{
+  "system_admin_navbar": [
+    {
+      "text": "Dashboard",
+      "url": "/system-admin/dashboard",
+      "type": "link"
+    },
+    {
+      "text": "Create new shop",
+      "url": "/system-admin/newshop",
+      "type": "link"
+    },
+    {
+      "text": "Settings",
+      "url": "/system-admin/settings",
+      "type": "link"
+    }
+  ]
+}

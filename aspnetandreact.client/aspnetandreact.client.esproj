@@ -9,6 +9,9 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="src\Components\SystemAdminNavbar.jsx" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="src\Components\" />
     <Folder Include="src\Styles\" />
     <Folder Include="src\Pages\" />

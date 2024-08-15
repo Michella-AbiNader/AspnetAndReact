@@ -68,7 +68,7 @@ function Register() {
 
 					<button className="singupBtn" type="submit">Sign up</button>
 					<p>Already have an account?
-						<a onClick={handleRegisterClick }> Login</a>
+						<a className="link" onClick={handleRegisterClick }> Login</a>
 					</p>
 				</form>
 			</div>

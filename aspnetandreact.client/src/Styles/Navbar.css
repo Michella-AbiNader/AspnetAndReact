@@ -1,0 +1,59 @@
+:root {
+    --mauve-light: #6A679E;
+    --mauve-bright: #5D54A4;
+    --button-color: #573b8a;
+    --button-onHover: #6d44b8;
+    --font: 'Jost', sans-serif;
+}
+body{
+    place-items:start !important
+}
+/* Styling for the main container of the Navbar */
+.Navbar-Container {
+    font: var(--font);
+    width: 100vw;
+    position: sticky;
+    height: 50px;
+    background-color: var(--mauve-bright)
+}
+
+    .Navbar-Container ul {
+        height: 50px;
+        display: flex;
+        flex-direction: row; 
+        justify-content: space-around;
+        align-items: center;
+        
+}
+
+    .Navbar-Container li {
+        height: 50px;
+        list-style: none; 
+        color: white
+    }
+
+
+    .Navbar-Container a {
+        display: block;
+        text-align: center;
+        padding-top: 10px;
+        padding-right: 2px;
+        padding-left: 2px;
+        height: 50px;
+        text-decoration: none;
+        color: black;
+    }
+
+        .Navbar-Container a:hover {
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            background-color: hsl(243, 52%, 61%);
+        }
+        .Navbar-Container a.active {
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            background-color: hsl(243, 52%, 61%);
+            font-size: 1.2em;
+        }
