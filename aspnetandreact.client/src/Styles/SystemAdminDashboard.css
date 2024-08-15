@@ -1,0 +1,10 @@
+
+.SAcontainer {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* 100vh=100% vieport height*/
+    font-family: 'Jost', sans-serif;
+    overflow: hidden;
+}

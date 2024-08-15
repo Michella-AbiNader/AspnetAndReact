@@ -1,6 +1,8 @@
+import '../Styles/SystemAdminDashboard.css'
+
 function SystemAdminDashboard() {
   return (
-      <p>SystemAdminDashboard</p>
+      <div className="SAcontainer">SystemAdminDashboard</div>
   );
 }
 

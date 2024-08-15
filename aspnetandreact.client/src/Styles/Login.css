@@ -10,7 +10,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-body {
+.Lcontainer {
     width: 100vw;
     display: flex;
     justify-content: center;

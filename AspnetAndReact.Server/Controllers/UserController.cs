@@ -1,6 +1,7 @@
 ﻿using AspnetAndReact.Server.Functions;
 using AspnetAndReact.Server.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Data;
 using System.Data.SqlClient;
 using System.Web.Http;
@@ -96,9 +97,9 @@ namespace AspnetAndReact.Server.Controllers
             sql.executeSql(query, parameters);
             if(!isSuccess)
             {
-                return "Username already exists";
+                return JsonConvert.SerializeObject(new {token = "", res = "Username already exists" });
             }
-            return "User added successfully!";
+            return JsonConvert.SerializeObject(new { id= userId, token = token, res = "User added successfully" });
         }
 
         [Microsoft.AspNetCore.Mvc.HttpPutAttribute]

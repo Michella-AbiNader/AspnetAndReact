@@ -12,7 +12,7 @@
     box-sizing: border-box;
 }
 
-body {
+.Rcontainer {
     width: 100vw;
     display: flex;
     justify-content: center;
