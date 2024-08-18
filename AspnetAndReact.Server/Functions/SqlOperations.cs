@@ -7,6 +7,19 @@ namespace AspnetAndReact.Server.Functions
     public class SqlOperations
     {
         string connectionString = "Data Source=DESKTOP-5GQU1D3;Initial Catalog=Shopping_App;User ID=micha; Password=micha123 ";
+        private readonly SqlConnection _connection;
+        private readonly SqlTransaction _transaction;
+
+        public SqlOperations()
+        {
+        }
+
+        // Constructor for operations within an existing transaction
+        public SqlOperations(SqlConnection connection, SqlTransaction transaction)
+        {
+            _connection = connection;
+            _transaction = transaction;
+        }
 
         public (DataTable dt, bool isSuccess) sqlToDataTable(string query, params SqlParameter[] sqlParameter)
         {
@@ -68,6 +81,41 @@ namespace AspnetAndReact.Server.Functions
                 return false;
             }
         }
+
+        // To execute multiple SQL commands within a transaction
+        public bool ExecuteSqlTransaction(string[] queries, SqlParameter[][] parameters)
+        {
+            using (SqlConnection sqlConnection = new SqlConnection(connectionString))
+            {
+                sqlConnection.Open();
+                using (SqlTransaction transaction = sqlConnection.BeginTransaction())
+                {
+                    try
+                    {
+                        for (int i = 0; i < queries.Length; i++)
+                        {
+                            using (SqlCommand command = new SqlCommand(queries[i], sqlConnection, transaction))
+                            {
+                                if (parameters[i] != null && parameters[i].Length > 0)
+                                {
+                                    command.Parameters.AddRange(parameters[i]);
+                                }
+                                command.ExecuteNonQuery();
+                            }
+                        }
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (SqlException)
+                    {
+                        transaction.Rollback();
+                        return false;
+                    }
+                }
+            }
+        }
+
+
         public string DataTableToJsonObj(DataTable dt)
         {
             DataSet ds = new DataSet();

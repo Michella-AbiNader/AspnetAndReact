@@ -88,9 +88,9 @@ input:focus {
     cursor: pointer;
 }
 
-button:hover {
-    background: #6d44b8;
-}
+    .singupBtn:hover {
+        background: #6d44b8;
+    }
 
 
 .login label {

@@ -21,7 +21,6 @@ function Login() {
 		e.preventDefault();
 		try {
 			res = await loginUser(username, password);
-			console.log(res)
 			if (res.type !== "") {
 				setUser({ id: res.id, username: username, token: res.token, type: res.type })
 				if (res.type == "admin") {

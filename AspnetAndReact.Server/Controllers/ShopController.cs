@@ -3,6 +3,7 @@ using AspnetAndReact.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
+using AspnetAndReact.Server.Controllers;
 
 namespace AspnetAndReact.Server.Controllers
 {
@@ -130,15 +131,24 @@ namespace AspnetAndReact.Server.Controllers
         [HttpDelete]
         public string Delete(int id)
         {
-            string query = "DELETE FROM shops WHERE id = @id";
             SqlOperations sql = new SqlOperations();
-            SqlParameter sqlParam = new SqlParameter("@id", id);
-            bool result = sql.executeSql(query, sqlParam);
+
+            string shopQuery = "DELETE FROM shops WHERE id = @id";
+            SqlParameter[] shopParams = { new SqlParameter("@id", id) };
+
+            string productQuery = "DELETE FROM products WHERE shop_id = @id";
+            SqlParameter[] productParams = { new SqlParameter("@id", id) };
+
+            string[] queries = { shopQuery, productQuery };
+            SqlParameter[][] parameters = { shopParams, productParams };
+
+            bool result = sql.ExecuteSqlTransaction(queries, parameters);
+
             if (result)
             {
-                return "Shop deleted successfully!";
+                return "Shop, user, and products deleted successfully!";
             }
-            return "Wrong Id provided";
+            return "Error occurred during deletion.";
         }
     }
 }

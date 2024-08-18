@@ -8,6 +8,7 @@
 * {
     margin: 0;
     padding: 0;
+    overflow: hidden;
     box-sizing: border-box;
 }
 .Lcontainer {
@@ -80,11 +81,10 @@ form {
     outline: none;
     border: none;
     border-radius: 5px;
-    transition: .2s ease-in;
     cursor: pointer;
 }
 
-button:hover {
+.loginbtn:hover {
     background: #6d44b8;
 }
 

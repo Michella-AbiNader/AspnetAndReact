@@ -45,13 +45,11 @@ body{
     }
 
         .Navbar-Container a:hover {
-            border-radius: 5px;
             text-decoration: none;
             color: white;
             background-color: hsl(243, 52%, 61%);
         }
         .Navbar-Container a.active {
-            border-radius: 5px;
             text-decoration: none;
             color: white;
             background-color: hsl(243, 52%, 61%);
