@@ -94,3 +94,38 @@
         border-radius:4px;
         
     }
+.edit-button {
+    width: 130px;
+    border-radius: 4px;
+    cursor: pointer;
+    justify-content: center;
+    color: white;
+    background: var(--mauve-bright);
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background: #6d44b8;
+    font-weight: 700;
+}
+.createButton {
+    float: right;
+    width: 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    justify-content: center;
+    color: white;
+    background: var(--mauve-bright);
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.createButton:hover {
+    background: #6d44b8;
+    font-weight: 700;
+}
+.createButton p{
+    display: none;
+}
