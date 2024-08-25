@@ -7,7 +7,6 @@ import UserContext from '../Components/UserContext'
 
 
 function Login() {
-	//gather the input and send it to the database
 	//javascript function to check password strength
 	const [username, setUsername] = useState('')
 	const [password, setPassword] = useState('')

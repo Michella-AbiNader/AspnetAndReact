@@ -5,7 +5,8 @@ import Register from '../src/Pages/Register'
 import SystemAdminDashboard from '../src/Pages/SystemAdminDashboard'
 import ShopAdminDashboard from '../src/Pages/SystemAdminDashboard'
 import UserApp from '../src/Pages/UserApp'
-import {UserProvider } from '../src/Components/UserContext'
+import { UserProvider } from '../src/Components/UserContext'
+import SystemAdminViewShop from '../src/Pages/SystemAdminViewShop'
 
 import '../src/App.css'
 //import RankItems from '../src/RankItems'
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/system-admin/dashboard" element={<SystemAdminDashboard />} />
                     <Route path="/adminDashboard" element={<ShopAdminDashboard />} />
                     <Route path="/app" element={<UserApp />} />
+                        <Route path="/system-admin/shop/:id" element={<SystemAdminViewShop />} />
 
             </Routes>
         </Router>

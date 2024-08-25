@@ -12,13 +12,24 @@ export const getShops = async () => {
         throw error;
     }
 };
+export const getShopById = async (id) => {
+    try {
+        const response = await axios.get(`${API_URL}/Shop/GetById`, {
+            params: { id: id }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting shops:', error);
+        throw error;
+    }
+};
 
 export const deleteShop = async (id) => {
     try {
         const response = await axios.get(`${API_URL}/Shop/Delete`, id);
         return response.data;
     } catch (error) {
-        console.error('Error getting shops:', error);
+        console.error('Error deleting shop:', error);
         throw error;
     }
 };

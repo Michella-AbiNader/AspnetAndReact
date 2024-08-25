@@ -22,12 +22,11 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    gap: 10px; /* Adds spacing between items if needed */
 }
-.header{
-    float:left;
+.header {
 }
 .Search-Bar {
-    float: right;
     padding: 5px 12px;
     font-size: 16px;
     border-radius: 4px;
@@ -111,21 +110,37 @@
     font-weight: 700;
 }
 .createButton {
-    float: right;
-    width: 50px;
-    border-radius: 10px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    padding-bottom: 10px;
+    margin-right: 10px;
+    border-radius: 20px;
     cursor: pointer;
-    justify-content: center;
     color: white;
     background: var(--mauve-bright);
     outline: none;
-    border-radius: 4px;
-    cursor: pointer;
+    border: none;
+    transition: width 0.3s ease, background-color 0.3s ease;
+    overflow: hidden;
+    width: 30px;
 }
-.createButton:hover {
-    background: #6d44b8;
-    font-weight: 700;
-}
-.createButton p{
-    display: none;
-}
+
+    .createButton:hover {
+        width: 150px;
+        background: #6d44b8;
+    }
+
+        .createButton:hover p {
+            display: inline;
+            margin-left: 5px;
+        }
+
+    .createButton p {
+        display: none;
+        margin: 0;
+    }
+    .plus-icon{
+        font-weight:700;
+    }
