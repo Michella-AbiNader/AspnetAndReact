@@ -116,7 +116,7 @@ namespace AspnetAndReact.Server.Controllers
                {
                 new SqlParameter("@id", id),
                 new SqlParameter("@name", shop.Name),
-                new SqlParameter("@description", shop.Category),
+                new SqlParameter("@category", shop.Category),
                 new SqlParameter("@image_url", shop.ImageUrl),
                 new SqlParameter("@theme_color", shop.ThemeColor)
                };

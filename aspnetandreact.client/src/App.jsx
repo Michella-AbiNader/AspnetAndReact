@@ -7,6 +7,7 @@ import ShopAdminDashboard from '../src/Pages/SystemAdminDashboard'
 import UserApp from '../src/Pages/UserApp'
 import { UserProvider } from '../src/Components/UserContext'
 import SystemAdminViewShop from '../src/Pages/SystemAdminViewShop'
+import ViewProduct from '../src/Pages/ViewProduct'
 
 import '../src/App.css'
 //import RankItems from '../src/RankItems'
@@ -23,6 +24,7 @@ function App() {
                     <Route path="/adminDashboard" element={<ShopAdminDashboard />} />
                     <Route path="/app" element={<UserApp />} />
                         <Route path="/system-admin/shop/:id" element={<SystemAdminViewShop />} />
+                        <Route path="/system-admin/product/:id" element={<ViewProduct />} />
 
             </Routes>
         </Router>

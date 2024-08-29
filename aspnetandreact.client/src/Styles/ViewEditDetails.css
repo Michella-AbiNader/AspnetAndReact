@@ -17,15 +17,17 @@
     height: 100%;
     overflow: hidden;
 }
-.form-container {
+.f-container {
     margin-top: 5px;
     border: 1px solid var(--mauve-bright);
     border-radius: 4px;
+    margin-bottom: 20px;
+}
+.form-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 20px;
     gap: 5px; /* Adds spacing between items if needed */
 }
     .form-container div {
@@ -44,16 +46,42 @@
     .form-container label {
         color: var(--mauve-bright);
         width: 100px;
+        display: inline-block; /* Allows width to take effect */
+        text-align: center; /* Aligns the text to the right, for better alignment with the input fields */
+        margin-right: 10px; /* Adds spacing between the label and input */
     }
     .form-container input:focus {
         border: 2px solid;
         border-color: #573b8a;
         outline: none
     }
-.header-Container {
-    flex-basis: 100% !important;
-    flex-grow: 10;
+.header-Con {
+    width:100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 10px; /* Adds spacing between items if needed */
 }
+
+#header {
+    float: left;
+
+}
+
+.msg-box {
+    padding-top: 7px;
+    padding-right: 7px;
+    padding-left: 7px;
+    border: solid 1px green;
+    color: green;
+    height: 40px;
+    background-color: lightgreen;
+    border-radius: 4px;
+    text-align: center;
+    margin-left: 50px;
+}
+
+
 .edit {
     margin: 5px;
     width: 130px;

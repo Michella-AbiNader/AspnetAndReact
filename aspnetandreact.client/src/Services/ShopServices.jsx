@@ -34,4 +34,19 @@ export const deleteShop = async (id) => {
     }
 };
 
+export const editShop = async (id, shop) => {
+    try {
+        const shopId = parseInt(id, 10)
+        const response = await axios.put(`${API_URL}/Shop/Put?id=${shopId}`, {
+            Name: shop.name,
+            Category: shop.category,
+            ImageUrl: shop.image_url,
+            ThemeColor: shop.theme_color
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating shop:', error);
+        throw error;
+    }
+};
 

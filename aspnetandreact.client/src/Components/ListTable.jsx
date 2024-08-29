@@ -49,7 +49,7 @@ function ListTable({ list=[], type }) {
         if (type == "Shops") {
             navigate(`/system-admin/shop/${id}`)
         } else {
-            //view product details
+            navigate(`/system-admin/product/${id}`)
         }
 
     }
