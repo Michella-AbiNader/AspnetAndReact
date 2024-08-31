@@ -7,12 +7,12 @@
     },
     {
       "text": "Create Shop",
-      "url": "/system-admin/newshop",
+      "url": "/system-admin/createshop",
       "type": "link"
     },
     {
       "text": "Create Category",
-      "url": "/system-admin/newcategory",
+      "url": "/system-admin/createcategory",
       "type": "link"
     },
     {

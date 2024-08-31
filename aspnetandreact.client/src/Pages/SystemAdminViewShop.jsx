@@ -34,7 +34,7 @@ function SystemAdminViewShop() {
         <>
             <NavBar />
             <ViewEditDetails item={shop} type="Shop" />
-            <ListTable list={products} type="Products" />
+            <ListTable list={products} type="Products" shopId={id} />
         </>
     );
 }

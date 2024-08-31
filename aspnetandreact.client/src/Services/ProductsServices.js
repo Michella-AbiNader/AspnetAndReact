@@ -61,7 +61,8 @@ export const createProduct = async (product) => {
             Price: product.price,
             Qunatity: product.quantity,
             ImageUrl: product.image_url,
-            CategoryId: product.category_id
+            CategoryId: product.category_id,
+            ShopId: product.shop_id
         });
         return response.data;
     } catch (error) {

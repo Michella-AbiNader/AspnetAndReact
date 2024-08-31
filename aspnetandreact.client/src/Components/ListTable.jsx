@@ -7,7 +7,7 @@ import { deleteShop } from '../Services/ShopServices';
 import { useNavigate } from 'react-router-dom';
 import { deleteProduct } from '../Services/ProductsServices';
 
-function ListTable({ list=[], type }) {
+function ListTable({ list=[], type, shopId="" }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [res, setRes] = useState(null) 
     const [showMessage, setShowMessage] = useState(false)
@@ -54,7 +54,7 @@ function ListTable({ list=[], type }) {
     }
 
     const handleCreateProduct = () =>{
-        //navigate to create product page
+        navigate(`/system-admin/createproduct/${shopId}`)
     }
 
     return (
