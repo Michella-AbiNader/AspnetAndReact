@@ -27,7 +27,9 @@ namespace AspnetAndReact.Server.Controllers
         [HttpGet]
         public string GetById(int id)
         {
-            string query = "SELECT * FROM products WHERE id = @id";
+            string query = "SELECT products.id, products.name, description, price, quantity, products.image_url, " +
+                "shop_id, category_id, category.name AS category_name FROM products JOIN category ON products.category_id = category.id " +
+                " WHERE products.id = @id";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@id", id);
             var response = sql.sqlToDataTable(query, sqlParam);
@@ -115,7 +117,7 @@ namespace AspnetAndReact.Server.Controllers
         public string Put(int id, [FromBody] Product product)
         {
             string query = "UPDATE products SET name = @name, description = @description, price = @price, " +
-                "quantity = @qunatity, image_url = @image_url, category_id = @category_id WHERE id = @id;";
+                "quantity = @quantity, image_url = @image_url, category_id = @category_id WHERE id = @id;";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
                {

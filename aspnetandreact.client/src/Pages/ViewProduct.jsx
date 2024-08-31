@@ -11,7 +11,7 @@ function ViewProduct() {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const res = await (getProductById())
+                const res = await (getProductById(id))
                 setProduct(res)
 
             } catch (error) {

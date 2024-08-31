@@ -13,7 +13,7 @@ namespace AspnetAndReact.Server.Controllers
         [HttpGet]
         public string Get()
         {
-            string query = "SELECT * FROM category";
+            string query = "SELECT id, name FROM category";
             SqlOperations sql = new SqlOperations();
             var response = sql.sqlToDataTable(query);
             DataTable dataTable = response.dt;
@@ -21,8 +21,8 @@ namespace AspnetAndReact.Server.Controllers
             {
                 return "No categories found";
             }
-            string students = sql.DataTableToJsonObj(dataTable);
-            return students;
+            string categories = sql.DataTableToJsonObj(dataTable);
+            return categories;
         }
 
         [HttpPost]

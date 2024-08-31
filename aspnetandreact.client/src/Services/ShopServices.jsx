@@ -49,4 +49,19 @@ export const editShop = async (id, shop) => {
         throw error;
     }
 };
+export const createShop = async (shop) => {
+    try {
+        const response = await axios.post(`${API_URL}/Shop/Post`, {
+            Name: shop.name,
+            Category: shop.category,
+            ImageUrl: shop.image_url,
+            ThemeColor: shop.theme_color,
+            UserID: shop.user_id
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error creating shop:', error);
+        throw error;
+    }
+};
 

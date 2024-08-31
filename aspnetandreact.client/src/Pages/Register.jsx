@@ -44,7 +44,7 @@ function Register() {
 			<div className="rcontainer">
 		<h3 className="rheader">Register</h3>
 				<form onSubmit={handleSubmit}>
-					<input className="input"
+					<input className="input" autoComplete="off"
 						type="text"
 						name="txt"
 						placeholder="User name"
@@ -52,15 +52,15 @@ function Register() {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 					/>
-					<input className="input" type="text" name="txt" placeholder="First name" required
+					<input className="input" type="text" name="txt" placeholder="First name" required autoComplete="off"
 						value={firstname}
 						onChange={(e)=> setFirstname(e.target.value) }
 					/>
-					<input className="input" type="text" name="txt" placeholder="Last name" required
+					<input className="input" type="text" name="txt" placeholder="Last name" required autoComplete="off"
 						value={lastname}
 						onChange={(e) => setLastname(e.target.value)}
 					/>
-					<input className="input" type="password" name="pswd" placeholder="Password" required
+					<input className="input" type="password" name="pswd" placeholder="Password" required autoComplete="off"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>

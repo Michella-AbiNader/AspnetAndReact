@@ -15,11 +15,10 @@ export const getProductsByShopId = async (shopId) => {
         throw error;
     }
 };
-export const getProductById = async (shopId) => {
+export const getProductById = async (id) => {
     try {
-        const id = parseInt(shopId, 10)
         const response = await axios.get(`${API_URL}/Product/GetById`, {
-            params: { shopId: id }
+            params: { id: id }
         });
         return response.data;
     } catch (error) {
@@ -37,11 +36,11 @@ export const deleteProduct = async (id) => {
         throw error;
     }
 };
-export const editShop = async (id, product) => {
+export const editProduct = async (id, product) => {
     try {
         const response = await axios.put(`${API_URL}/Product/Put?id=${id}`, {
             Name: product.name,
-            Description: product.name,
+            Description: product.description,
             Price: product.price,
             Qunatity: product.quantity,
             ImageUrl: product.image_url,
@@ -49,7 +48,24 @@ export const editShop = async (id, product) => {
         });
         return response.data;
     } catch (error) {
-        console.error('Error updating shop:', error);
+        console.error('Error updating product:', error);
+        throw error;
+    }
+};
+
+export const createProduct = async (product) => {
+    try {
+        const response = await axios.post(`${API_URL}/Product/Post`, {
+            Name: product.name,
+            Description: product.description,
+            Price: product.price,
+            Qunatity: product.quantity,
+            ImageUrl: product.image_url,
+            CategoryId: product.category_id
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error updating product:', error);
         throw error;
     }
 };

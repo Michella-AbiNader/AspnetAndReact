@@ -6,8 +6,13 @@
       "type": "link"
     },
     {
-      "text": "Create new shop",
+      "text": "Create Shop",
       "url": "/system-admin/newshop",
+      "type": "link"
+    },
+    {
+      "text": "Create Category",
+      "url": "/system-admin/newcategory",
       "type": "link"
     },
     {

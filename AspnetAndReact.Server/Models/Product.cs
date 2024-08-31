@@ -13,8 +13,7 @@ namespace AspnetAndReact.Server.Models
         public float Price { get; set; }
         public int Quantity { get; set; }
         public string ImageUrl { get; set; }
-        [Required]
-        public string ShopId { get; set; }
+        public string? ShopId { get; set; }
         [Required]
         public string CategoryId { get; set; }
 

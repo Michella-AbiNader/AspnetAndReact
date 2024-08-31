@@ -45,7 +45,7 @@ function Login() {
 			<div className="container">
 			<h3 className="header">Login</h3>
 				<form onSubmit={handleSubmit }>
-					<input className="input" type="text"
+					<input className="input" type="text" autoComplete="off"
 						name="txt"
 						placeholder="User name"
 						required
@@ -53,7 +53,7 @@ function Login() {
 						onChange={(e) => setUsername(e.target.value)}
 						 />
 
-					<input className="input" type="password"
+					<input className="input" type="password" autoComplete="off"
 						name="pswd"
 						placeholder="Password"
 						required

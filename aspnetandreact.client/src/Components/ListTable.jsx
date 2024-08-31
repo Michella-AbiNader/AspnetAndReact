@@ -19,10 +19,9 @@ function ListTable({ list=[], type }) {
     };
 
     // Filtered list based on search query
-    const filteredList = list.filter(item =>
+    const filteredList = Array.isArray(list) ? list.filter(item =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-
+    ) : [];
     const handleDelete = async (e,id, type) => {
         var response;
         e.preventDefault();
@@ -80,7 +79,7 @@ function ListTable({ list=[], type }) {
                 </div>
             </div>
             <div className="table-container">
-                {filteredList && filteredList.length > 0 ? (
+                {filteredList.length > 0 ? (
                     <table className="table">
                         <thead>
                             <tr>

@@ -34,20 +34,58 @@
         flex-basis: 500px;
         flex-grow: 1;
         margin-bottom: 10px;
+        display: flex; /* Ensures label and input are side by side */
+        align-items: center; /* Vertically centers the label and input */
     }
-.form-container input {
-        margin: 0;
-        width: 80%;
-        border: 2px solid #ddd;
-        outline: none;
-        border-radius: 4px;
-        padding: 10px;
+    #price{
+        width: 100px;
     }
+    #quantity{
+        width: 100px;
+    }
+#description {
+    margin: 0;
+    width: 80%;
+    border: 2px solid #ddd;
+    outline: none;
+    border-radius: 4px;
+    padding: 10px;
+    font: var(--font)
+}
+    #description:focus {
+        border: 2px solid;
+        border-color: #573b8a;
+        outline: none
+    }
+#lbl_desc{
+    padding-bottom:20px
+}
+#drpdown-input {
+    margin: 0;
+    width: 80%;
+    border: 2px solid #ddd;
+    outline: none;
+    border-radius: 4px;
+    padding: 10px;
+}
+    #drpdown-input:focus {
+        border: 2px solid;
+        border-color: #573b8a;
+        outline: none
+    }
+    .form-container input {
+    margin: 0;
+    width: 80%;
+    border: 2px solid #ddd;
+    outline: none;
+    border-radius: 4px;
+    padding: 10px;
+}
     .form-container label {
         color: var(--mauve-bright);
         width: 100px;
         display: inline-block; /* Allows width to take effect */
-        text-align: center; /* Aligns the text to the right, for better alignment with the input fields */
+        text-align: center; 
         margin-right: 10px; /* Adds spacing between the label and input */
     }
     .form-container input:focus {
@@ -187,3 +225,7 @@
         background: #6d44b8;
         font-weight: 700;
     }
+#theme-color {
+    padding: 0px;
+    width: 150px;
+}
