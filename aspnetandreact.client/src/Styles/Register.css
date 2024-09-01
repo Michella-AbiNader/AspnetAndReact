@@ -1,8 +1,8 @@
 :root {
-    --mauve-light: #6A679E;
-    --mauve-bright: #5D54A4;
-    --button-color: #573b8a;
-    --button-onHover: #6d44b8;
+    --register-mauve-light: #6A679E;
+    --register-mauve-bright: #5D54A4;
+    --register-button-color: #573b8a;
+    --register-button-onHover: #6d44b8;
     --font: 'Jost', sans-serif;
 }
 
@@ -24,14 +24,13 @@
 }
 
 .rcontainer {
-    padding: 1rem; /*1rem = 16px*/
     background: #dde6e1;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     border-radius: 8px;
     align-items: center;
-    padding-top: 2rem;
+    padding-top: 1rem;
     border-radius: 10px;
     box-shadow: 5px 20px 50px #000;
     z-index: 20;
@@ -41,7 +40,7 @@
 }
 
 .rheader {
-    color: var(--button-color);
+    color: var(--register-button-color);
     font-size: 2em;
 }
 
@@ -103,13 +102,13 @@ p {
 }
 
 .link {
-    color: var(--button-color);
+    color: var(--register-button-color);
     text-decoration: none;
     cursor: pointer;
 }
 
     .link:hover {
-        color: var(--button-onHover);
+        color: var(--register-button-onHover);
         text-decoration: underline;
     }
 
@@ -226,3 +225,22 @@ p {
         border: none;
     }
 }
+.password-strength {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+    .password-strength.strong {
+        color: green;
+    }
+
+    .password-strength.medium {
+        color: orange;
+    }
+
+    .password-strength.weak {
+        color: red;
+    }
+    .password-strength.short {
+        color: red;
+    }

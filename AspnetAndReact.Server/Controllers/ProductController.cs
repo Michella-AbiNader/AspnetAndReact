@@ -1,6 +1,7 @@
 ﻿using AspnetAndReact.Server.Functions;
 using AspnetAndReact.Server.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -45,7 +46,9 @@ namespace AspnetAndReact.Server.Controllers
         [HttpGet]
         public string GetByShop(int shopId)
         {
-            string query = "SELECT * FROM products WHERE shop_id = @shopId";
+            string query = "SELECT products.id, products.name, description, price, quantity, products.image_url, " +
+                "shop_id, category_id, category.name AS category FROM products JOIN category ON products.category_id = category.id " +
+                "WHERE shop_id = @shopId";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@shopId", shopId);
             var response = sql.sqlToDataTable(query, sqlParam);
@@ -109,9 +112,21 @@ namespace AspnetAndReact.Server.Controllers
             var result = sql.executeSql(query, sqlParameters);
             if (!result)
             {
-                return "Product already exists";
+                var res = new
+                {
+                    status = false,
+                    message = "Couldn't create product!"
+
+                };
+                return JsonConvert.SerializeObject(res);
             }
-            return "Product added successfully!";
+            var response = new
+            {
+                status = true,
+                message = "Product created successfully!"
+
+            };
+            return JsonConvert.SerializeObject(response);
         }
         [HttpPut]
         public string Put(int id, [FromBody] Product product)
@@ -133,9 +148,21 @@ namespace AspnetAndReact.Server.Controllers
             bool result = sql.executeSql(query, sqlParameters);
             if (!result)
             {
-                return "Wrong id or input provided";
-            }
-            return "Product updated successfully!";
+                var res = new
+                {
+                    status = false,
+                    message = "Couldn't update product. Wrong id or input provided"
+
+                };
+            return JsonConvert.SerializeObject(res);
+        }
+            var response = new
+            {
+                status = true,
+                message = "Product updated successfully!"
+
+            };
+            return JsonConvert.SerializeObject(response);
         }
 
         [HttpDelete]
@@ -147,9 +174,21 @@ namespace AspnetAndReact.Server.Controllers
             bool result = sql.executeSql(query, sqlParam);
             if (result)
             {
-                return "Product deleted successfully!";
+                var response = new
+                {
+                    status = true,
+                    message = "Product deleted successfully!"
+
+                };
+                return JsonConvert.SerializeObject(response);
             }
-            return "Wrong Id provided";
+            var res = new
+            {
+                status = false,
+                message = "Couldn't delete product. Wrong Id provided"
+
+            };
+            return JsonConvert.SerializeObject(res);
         }
 
     }

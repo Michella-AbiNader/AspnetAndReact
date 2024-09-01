@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Data.SqlClient;
 using AspnetAndReact.Server.Controllers;
+using Newtonsoft.Json;
 
 namespace AspnetAndReact.Server.Controllers
 {
@@ -102,9 +103,21 @@ namespace AspnetAndReact.Server.Controllers
             var result = sql.executeSql(query, sqlParameters);
             if (!result)
             {
-                return "Shop already exists";
+                var response = new
+                {
+                    status = false,
+                    message = "Couldn't create shop!"
+
+                };
+                return JsonConvert.SerializeObject(response);
             }
-            return "Shop added successfully!";
+            var res = new
+            {
+                status = true,
+                message = "Shop created successfully!"
+
+            };
+            return JsonConvert.SerializeObject(res);
         }
         [HttpPut]
         public string Put(int id, [FromBody] Shop shop)
@@ -124,9 +137,21 @@ namespace AspnetAndReact.Server.Controllers
             bool result = sql.executeSql(query, sqlParameters);
             if (!result)
             {
-                return "Wrong id or input provided";
+                var response = new
+                {
+                    status = false,
+                    message = "Couldn't update shop! Wrong input provided."
+
+                };
+                return JsonConvert.SerializeObject(response);
             }
-            return "Shop updated successfully!";
+            var res = new
+            {
+                status = true,
+                message = "Shop created successfully!"
+
+            };
+            return JsonConvert.SerializeObject(res);
         }
         [HttpDelete]
         public string Delete(int id)
@@ -146,9 +171,21 @@ namespace AspnetAndReact.Server.Controllers
 
             if (result)
             {
-                return "Shop, user, and products deleted successfully!";
+                var response = new
+                {
+                    status = true,
+                    message = "Shop, user and products deleted successfully!"
+
+                };
+                return JsonConvert.SerializeObject(response);
             }
-            return "Error occurred during deletion.";
+            var res= new
+            {
+                status = false,
+                message = "Couldm't delete shop! Error occurred during deletion."
+
+            };
+            return JsonConvert.SerializeObject(res);
         }
     }
 }

@@ -4,6 +4,12 @@
     --button-color: #573b8a;
     --button-onHover: #6d44b8;
     --font: 'Jost', sans-serif;
+    --table-header-words: black;
+    --table-rows: hsl(243, 22%, 81%);
+    --table-rows-hover: #9D9BC4;
+    --navbar-color-hover: white;
+    --navbar-color: black;
+    --navbar-hover-active: hsl(243, 52%, 61%);
 }
 body{
     place-items:start !important
@@ -29,7 +35,6 @@ body{
     .Navbar-Container li {
         height: 50px;
         list-style: none; 
-        color: white
     }
 
 
@@ -41,17 +46,17 @@ body{
         padding-left: 2px;
         height: 50px;
         text-decoration: none;
-        color: black;
+        color: var(--navbar-color);
     }
 
         .Navbar-Container a:hover {
             text-decoration: none;
-            color: white;
-            background-color: hsl(243, 52%, 61%);
+            color: var(--navbar-color-hover);
+            background-color: var(--navbar-hover-active);
         }
         .Navbar-Container a.active {
             text-decoration: none;
-            color: white;
-            background-color: hsl(243, 52%, 61%);
+            color: var(--navbar-color-hover);
+            background-color: var(--navbar-hover-active);
             font-size: 1.2em;
         }

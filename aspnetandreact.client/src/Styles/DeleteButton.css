@@ -73,6 +73,6 @@ body {
     cursor: pointer;
 }
     .cancel-button:hover {
-        background: #6d44b8;
+        background: var(--button-onHover);
         font-weight: 700;
     }

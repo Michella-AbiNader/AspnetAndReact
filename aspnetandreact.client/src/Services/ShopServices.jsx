@@ -26,7 +26,7 @@ export const getShopById = async (id) => {
 
 export const deleteShop = async (id) => {
     try {
-        const response = await axios.get(`${API_URL}/Shop/Delete`, id);
+        const response = await axios.delete(`${API_URL}/Shop/Delete?id=${id}`);
         return response.data;
     } catch (error) {
         console.error('Error deleting shop:', error);

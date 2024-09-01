@@ -57,11 +57,11 @@
     margin-right: 10px; /* Adds spacing between the label and input */
 }
 
-.cr-form-container input:focus {
-    border: 2px solid;
-    border-color: #573b8a;
-    outline: none
-}
+    .cr-form-container input:focus {
+        border: 2px solid;
+        border-color: var(--button-color);
+        outline: none
+    }
 
 
 .cr-save {
@@ -76,10 +76,27 @@
 }
 
     .cr-save:hover {
-        background: #6d44b8;
+        background: var(--button-onHover);
         font-weight: 700;
     }
 #theme-color{
     padding: 0px;
     width: 150px;
+}
+
+
+#strong:focus {
+    border: 2px solid green;
+}
+
+#medium:focus {
+    border: 2px solid orange;
+}
+
+#weak:focus {
+    border: 2px solid red;
+}
+
+#short:focus {
+    border: 2px solid red;
 }

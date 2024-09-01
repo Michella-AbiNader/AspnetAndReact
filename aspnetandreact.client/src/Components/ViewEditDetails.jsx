@@ -4,6 +4,31 @@ import { editShop } from '../Services/ShopServices'
 import { getCategories } from '../Services/CategoryServices'
 import { editProduct } from '../Services/ProductsServices';
 /* eslint-disable react/prop-types */
+
+//To change color based on theme_color
+//function lightenColor(color, percent) {
+//    const num = parseInt(color.replace("#", ""), 16),
+//        amt = Math.round(2.55 * percent),
+//        R = (num >> 16) + amt,
+//        G = (num >> 8 & 0x00FF) + amt,
+//        B = (num & 0x0000FF) + amt;
+//    return `#${(
+//        0x1000000 +
+//        (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
+//        (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
+//        (B < 255 ? B < 1 ? 0 : B : 255)
+//    ).toString(16).slice(1).toUpperCase()}`;
+//}
+//useEffect(() => {
+//    if (item.length > 0) {
+//        const themeColor = item[0].theme_color;
+//        if (themeColor) {
+//            document.documentElement.style.setProperty('--mauve-light', lightenColor(themeColor, 20)); // Light variant
+//            document.documentElement.style.setProperty('--mauve-bright', lightenColor(themeColor, -10)); // Bright variant
+//        }
+//    }
+//}, [item]);
+
 function ViewEditDetails({ item = [], type }) {
     const [isEditing, setIsEditing] = useState(false);
     const [initialData, setInitialData] = useState({});
@@ -13,10 +38,9 @@ function ViewEditDetails({ item = [], type }) {
     const [res, setRes] = useState();
     const [showMessage, setShowMessage] = useState(false);
     const [categories, setCategories] = useState({})
-
     useEffect(() => {
         if (item.length > 0) {
-            setInitialData(item[0]); // Initialize formData based on the incoming item
+            setInitialData(item[0]);
         }
     }, [item])
         ; 
@@ -47,7 +71,6 @@ function ViewEditDetails({ item = [], type }) {
                 ...data,
                 [name]: value,
             });
-            console.log(data)
         }
         else {
             if (name === 'category') {
@@ -63,8 +86,6 @@ function ViewEditDetails({ item = [], type }) {
                     [name]: value,
                 });
             }
-            
-            console.log(data)
         }
         
     };
@@ -77,14 +98,20 @@ function ViewEditDetails({ item = [], type }) {
         if (type == "Shop") {
             elements = document.getElementsByClassName("shop-input")
             for (let element of elements) {
-                element.value = ""
+                if (element.name == "theme_color") {
+                    element.value = initialData.theme_color || ''
+                } else {
+                    element.value = ""
+                }
             }
+            setData({ name: "", category: "", image_url: "", theme_color: "" })
         }
         else {
             elements = document.getElementsByClassName("product-input")
             for (let element of elements) {
                 element.value = ""
             }
+            setProductData({ name: "", description: "", price: "", quantity: "", image_url: "", category_id: "" })
         }
     }
 
@@ -103,17 +130,16 @@ function ViewEditDetails({ item = [], type }) {
         let response
         if (type == "Shop") {
             const updatedData = {
-                name: data.name || initialData.name, // Use formData if data.name is empty
+                name: data.name || initialData.name, // Use initialData if data.name is empty
                 category: data.category || initialData.category,
                 image_url: data.image_url || initialData.image_url,
                 theme_color: data.theme_color || initialData.theme_color
             };
             try {
                 response = await editShop(initialData.id, updatedData);
-
-
             } catch (error) {
                 console.log(error);
+                setRes({status: false, message: "An error occured while saving changes!"})
             }
         }
         else {
@@ -129,6 +155,7 @@ function ViewEditDetails({ item = [], type }) {
                 response = await editProduct(initialData.id, updatedData);
             } catch (error) {
                 console.log(error);
+                setRes({ status: false, message: "An error occured while saving changes!" })
             }
         }
         
@@ -146,7 +173,7 @@ function ViewEditDetails({ item = [], type }) {
                     <>
                         <div className="header-Con">
                             <p id="header" className="header">{type} Details</p>
-                            {showMessage && <p className="msg-box">{res}</p>}
+                            {showMessage && <p className={res.status ? "msg-box-true" : "msg-box-false"}>{res.message}</p>}
                         </div>
                         <div className="form-container">
                         <div>
@@ -182,11 +209,13 @@ function ViewEditDetails({ item = [], type }) {
                         <div>
                             <label>Theme Color:</label>
                                 <input className="shop-input" autoComplete="off" id="theme-color"
-                                type="color"
-                                name="theme_color"
+                                    type="color"
+                                    name="theme_color"
                                     placeholder={initialData.theme_color || ''}
-                                onChange={handleInputChange}
-                                readOnly={!isEditing}
+                                    value={data.theme_color || initialData.theme_color || ''}
+                                    onChange={handleInputChange}
+                                    readOnly={!isEditing}
+                                    disabled={!isEditing} 
                             />
                         </div>
                         <div>
@@ -206,7 +235,7 @@ function ViewEditDetails({ item = [], type }) {
                     <>
                         <div className="header-Con">
                             <p id="header" className="header">{type} Details</p>
-                            {showMessage && <p className="msg-box">{res}</p>}
+                            {showMessage && <p className={res.status ? "msg-box-true" : "msg-box-false"}>{res.message}</p>}
                         </div>
                         <div className="form-container">
                             <div>
@@ -320,5 +349,3 @@ function ViewEditDetails({ item = [], type }) {
 }
 
 export default ViewEditDetails;
-
-//selected={cat.id == initialData.category_id }

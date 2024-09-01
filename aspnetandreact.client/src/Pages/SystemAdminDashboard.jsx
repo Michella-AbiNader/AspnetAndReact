@@ -1,4 +1,3 @@
-import '../Styles/SystemAdminDashboard.css'
 import NavBar from '../Components/NavBar';
 import ListTable from '../Components/ListTable';
 import { useEffect, useState } from 'react';
@@ -21,7 +20,7 @@ function SystemAdminDashboard() {
   return (
       <div className="SAcontainer">
           <NavBar></NavBar>
-        <ListTable list={shops} type="Shops"/>
+          <ListTable list={shops} setList={setShops} type="Shops"/>
       </div>
   );
 }

@@ -46,7 +46,7 @@ function Login() {
 			<h3 className="header">Login</h3>
 				<form onSubmit={handleSubmit }>
 					<input className="input" type="text" autoComplete="off"
-						name="txt"
+						name="txt" maxLength="30"
 						placeholder="User name"
 						required
 						value={username}
@@ -54,7 +54,7 @@ function Login() {
 						 />
 
 					<input className="input" type="password" autoComplete="off"
-						name="pswd"
+						name="pswd" maxLength="30"
 						placeholder="Password"
 						required
 						value={password }

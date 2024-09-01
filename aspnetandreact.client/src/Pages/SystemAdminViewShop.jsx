@@ -28,13 +28,13 @@ function SystemAdminViewShop() {
         };
 
         fetchProductsShop();
-    }, [id]); // Dependency array ensures this only runs when `id` changes
+    }, [id, products]); // Dependency array ensures this only runs when `id` changes
 
     return (
         <>
             <NavBar />
             <ViewEditDetails item={shop} type="Shop" />
-            <ListTable list={products} type="Products" shopId={id} />
+            <ListTable list={products} setList={setProducts} type="Products" shopId={id} />
         </>
     );
 }

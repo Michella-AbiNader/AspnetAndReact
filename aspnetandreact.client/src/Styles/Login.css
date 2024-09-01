@@ -1,14 +1,15 @@
 :root {
-    --mauve-light: #6A679E;
-    --mauve-bright: #5D54A4;
-    --button-color: #573b8a;
-    --button-onHover: #6d44b8;
+    --login-mauve-light: #6A679E;
+    --login-mauve-bright: #5D54A4;
+    --login-button-color: #573b8a;
+    --login-button-onHover: #6d44b8;
     --font: 'Jost', sans-serif;
 }
 * {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow-y: hidden;
+    overflow-x:hidden;
     box-sizing: border-box;
 }
 .Lcontainer {
@@ -38,7 +39,7 @@
 }
 
 .header {
-    color: var(--button-color);
+    color: var(--login-button-color);
     font-size: 2em;
 }
 form {
@@ -99,13 +100,13 @@ p {
 }
 
 .link {
-    color: var(--button-color);
+    color: var(--login-button-color);
     text-decoration: none;
     cursor: pointer;
 }
 
     .link:hover {
-        color: var(--button-onHover);
+        color: var(--login-button-onHover);
         text-decoration: underline;
     }
 

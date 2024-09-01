@@ -41,8 +41,6 @@ function CreateProduct() {
                 [e.target.name]: e.target.value
             })
         }
-        
-
     }
     const handleCancel = (e) => {
         e.preventDefault();

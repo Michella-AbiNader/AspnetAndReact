@@ -12,7 +12,7 @@ function DeleteButton({ id, type, onDelete }) {
 
     const handleConfirmDelete = async (e) => {
         e.preventDefault();
-        onDelete(id, type)
+        onDelete(e,id, type)
         setShowConfirmation(false);
     };
 

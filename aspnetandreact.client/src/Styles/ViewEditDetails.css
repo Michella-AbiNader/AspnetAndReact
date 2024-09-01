@@ -54,7 +54,7 @@
 }
     #description:focus {
         border: 2px solid;
-        border-color: #573b8a;
+        border-color: var(--button-color);
         outline: none
     }
 #lbl_desc{
@@ -70,7 +70,7 @@
 }
     #drpdown-input:focus {
         border: 2px solid;
-        border-color: #573b8a;
+        border-color: var(--button-color);
         outline: none
     }
     .form-container input {
@@ -88,11 +88,11 @@
         text-align: center; 
         margin-right: 10px; /* Adds spacing between the label and input */
     }
-    .form-container input:focus {
-        border: 2px solid;
-        border-color: #573b8a;
-        outline: none
-    }
+.form-container input:focus {
+    border: 2px solid;
+    border-color: var(--button-color);
+    outline: none
+}
 .header-Con {
     width:100%;
     display: flex;
@@ -103,7 +103,6 @@
 
 #header {
     float: left;
-
 }
 
 .msg-box {
@@ -131,7 +130,7 @@
     outline: none;
 }
     .edit:hover {
-        background: #6d44b8;
+        background: var(--button-onHover);
         font-weight: 700;
     }
 .save {
@@ -145,7 +144,7 @@
     outline: none;
 }
     .save:hover {
-        background: #6d44b8;
+        background: var(--button-onHover);
         font-weight: 700;
     }
 .cancel {
@@ -222,7 +221,7 @@
 }
 
     .cancel-button:hover {
-        background: #6d44b8;
+        background: var(--button-onHover);
         font-weight: 700;
     }
 #theme-color {

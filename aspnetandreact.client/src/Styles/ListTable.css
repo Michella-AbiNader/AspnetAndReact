@@ -5,7 +5,10 @@
     --button-color: #573b8a;
     --button-onHover: #6d44b8;
     --font: 'Jost', sans-serif;
-}
+    --table-header-words: black;
+    --table-rows: hsl(243, 22%, 81%);
+    --table-rows-hover: #9D9BC4;
+}   
 * {
     margin: 0;
     padding: 0;
@@ -25,6 +28,7 @@
     gap: 10px; /* Adds spacing between items if needed */
 }
 .header {
+    color: var(--button-color)
 }
 .Search-Bar {
     padding: 5px 12px;
@@ -53,7 +57,7 @@
 
     .table th {
         background-color: var(--mauve-bright);
-        color: black;
+        color: var(--table-header-words);
         padding: 12px 15px;
         border-bottom: 1px solid #ddd;
         word-wrap: break-word; /* Breaks long words */
@@ -69,11 +73,11 @@
         border-right: 1px solid var(--mauve-light);
     }
     .table tr:nth-child(even) {
-        background-color: hsl(243, 22%, 81%);
+        background-color: var(--table-rows);
     }
 
     .table tr:hover {
-        background-color: #9D9BC4;
+        background-color: var(--table-rows-hover);
     }
     .table td img {
         border-radius: 4px;
@@ -82,7 +86,7 @@
         height: 50px;
     }
 
-    .message-box{
+    .message-box-true{
         padding-top: 7px;
         padding-right: 7px;
         padding-left: 7px;
@@ -93,6 +97,17 @@
         border-radius:4px;
         
     }
+.message-box-false {
+    padding-top: 7px;
+    padding-right: 7px;
+    padding-left: 7px;
+    border: solid 1px red;
+    color: red;
+    height: 40px;
+    background-color: #ffbaba;
+    border-radius: 4px;
+}
+
 .edit-button {
     width: 130px;
     border-radius: 4px;

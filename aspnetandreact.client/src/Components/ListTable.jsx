@@ -7,7 +7,7 @@ import { deleteShop } from '../Services/ShopServices';
 import { useNavigate } from 'react-router-dom';
 import { deleteProduct } from '../Services/ProductsServices';
 
-function ListTable({ list=[], type, shopId="" }) {
+function ListTable({ list = [], setList, type, shopId="" }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [res, setRes] = useState(null) 
     const [showMessage, setShowMessage] = useState(false)
@@ -23,25 +23,27 @@ function ListTable({ list=[], type, shopId="" }) {
         item.name.toLowerCase().includes(searchQuery.toLowerCase())
     ) : [];
     const handleDelete = async (e,id, type) => {
-        var response;
         e.preventDefault();
-        if (type == "Shops") {
-            try {
-                response = await deleteShop(id)
-            } catch (error) {
-                console.log(error)
+        try {
+            let response;
+            if (type === "Shops") {
+                response = await deleteShop(id);
+            } else {
+                response = await deleteProduct(id);
             }
-            setRes(response)
-            setShowMessage(true)
-        }
-        else {
-            try {
-                response = await deleteProduct(id)
-            } catch (error) {
-                console.log(error)
+
+            if (response.status) {
+                // If deletion was successful, update the list by filtering out the deleted item
+                setList(prevList => prevList.filter(item => item.id !== id));
+                setRes({ status: response.status, message: response.message});
+            } else {
+                setRes({ status: response.status, message: response.message });
             }
-            setRes(response)
-            setShowMessage(true)
+            setShowMessage(true);
+        } catch (error) {
+            console.log(error);
+            setRes({ status: false, message: "An error occurred during deletion." });
+            setShowMessage(true);
         }
     };
     const handleViewClick = (id) => {
@@ -61,7 +63,7 @@ function ListTable({ list=[], type, shopId="" }) {
         <div className="List-Container">
             <div className="header-Container">
                 <p className="header">{type} List</p>
-                {showMessage && <p className="message-box">Message: {res}</p>}
+                {showMessage && <p className={res.status? "message-box-true": "message-box-false"}>{res.message}</p>}
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     {type === "Products" && (
                         <button className="createButton" onClick={handleCreateProduct}>
