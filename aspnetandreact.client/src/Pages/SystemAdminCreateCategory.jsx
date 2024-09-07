@@ -9,4 +9,4 @@ function SystemAdminCreateCategory() {
   );
 }
 
-export default CreateCategory;
+export default SystemAdminCreateCategory;

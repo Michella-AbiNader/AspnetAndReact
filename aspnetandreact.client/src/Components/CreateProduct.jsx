@@ -48,11 +48,12 @@ function CreateProduct() {
     };
     const handleConfirmSave = async (e) => {
         e.preventDefault()
+        let response
         try {
-            let response = await createProduct(data);
+            response = await createProduct(data);
             setRes(response)
         } catch (error) {
-            setRes(error)
+            setRes(response)
             console.log(error);
         }
         setShowMessage(true)
@@ -68,7 +69,7 @@ function CreateProduct() {
           <form className="cr-f-container" onSubmit={handleConfirm}>
           <div className="header-Con">
               <p id="header" className="header">Create Product</p>
-                  {showMessage && <p className="msg-box">{res}</p>
+                  {showMessage && <p className={res.status ? "msg-box-true" : "msg-box-false"}>{res.mesasge}</p>
                   }
           </div>
           <div className="form-container">

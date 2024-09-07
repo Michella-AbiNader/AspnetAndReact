@@ -1,6 +1,7 @@
 ﻿using AspnetAndReact.Server.Functions;
 using AspnetAndReact.Server.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -39,9 +40,21 @@ namespace AspnetAndReact.Server.Controllers
             var result = sql.executeSql(query, sqlParameters);
             if (!result)
             {
-                return "Category already exists";
+                var res = new
+                {
+                    status = false,
+                    message = "Category already exists!"
+
+                };
+                return JsonConvert.SerializeObject(res);
             }
-            return "Category added successfully!";
+            var response = new
+            {
+                status = true,
+                message = "Category created successfully!"
+
+            };
+            return JsonConvert.SerializeObject(response);
         }
 
         [HttpPut]

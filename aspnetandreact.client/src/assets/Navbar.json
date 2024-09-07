@@ -16,8 +16,8 @@
       "type": "link"
     },
     {
-      "text": "Settings",
-      "url": "/system-admin/settings",
+      "text": "Logout",
+      "url": "/",
       "type": "link"
     }
   ]

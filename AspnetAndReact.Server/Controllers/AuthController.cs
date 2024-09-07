@@ -36,6 +36,10 @@ namespace AspnetAndReact.Server.Controllers
                 };
                 return JsonConvert.SerializeObject(response);
             }
+            if(result.type == "shop admin")
+            {
+                //fetch the theme color for the shop and send it with the response
+            }
             var response2 = new
             {
                 id = result.id,

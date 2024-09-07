@@ -84,10 +84,12 @@ function CreateShop() {
     }
     const handleConfirmSave = async (e) => {
         e.preventDefault()
+        let response
         try {
-            let response = await createShop(data);
+            response = await createShop(data);
             setRes(response)
         } catch (error) {
+            setRes(response)
             console.log(error);
         }
         setShowMessage(true)

@@ -100,3 +100,28 @@
 #short:focus {
     border: 2px solid red;
 }
+.msg-box-true {
+    padding-top: 7px;
+    padding-right: 7px;
+    padding-left: 7px;
+    border: solid 1px green;
+    color: green;
+    height: 40px;
+    background-color: lightgreen;
+    border-radius: 4px;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.msg-box-false {
+    padding-top: 7px;
+    padding-right: 7px;
+    padding-left: 7px;
+    border: solid 1px red;
+    color: red;
+    height: 40px;
+    background-color: #ffbaba;
+    border-radius: 4px;
+    text-align: center;
+    margin-left: 50px;
+}
