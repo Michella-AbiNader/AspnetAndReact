@@ -1,6 +1,8 @@
+import NavBar from "../Components/NavBar";
+
 function ShopAdminDashboard() {
   return (
-      <p>ShopAdminDashboard</p>
+      <NavBar/>
   );
 }
 

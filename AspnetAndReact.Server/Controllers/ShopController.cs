@@ -164,7 +164,7 @@ namespace AspnetAndReact.Server.Controllers
             string productQuery = "DELETE FROM products WHERE shop_id = @id";
             SqlParameter[] productParams = { new SqlParameter("@id", id) };
 
-            string[] queries = { shopQuery, productQuery };
+            string[] queries = { productQuery, shopQuery };
             SqlParameter[][] parameters = { shopParams, productParams };
 
             bool result = sql.ExecuteSqlTransaction(queries, parameters);
@@ -174,7 +174,7 @@ namespace AspnetAndReact.Server.Controllers
                 var response = new
                 {
                     status = true,
-                    message = "Shop, user and products deleted successfully!"
+                    message = "Shop and related products deleted successfully!"
 
                 };
                 return JsonConvert.SerializeObject(response);
@@ -182,7 +182,7 @@ namespace AspnetAndReact.Server.Controllers
             var res= new
             {
                 status = false,
-                message = "Couldm't delete shop! Error occurred during deletion."
+                message = "Couldn't delete shop! Error occurred during deletion."
 
             };
             return JsonConvert.SerializeObject(res);

@@ -25,6 +25,7 @@ function Login() {
 				if (res.type == "admin") {
 					navigate('/system-admin/dashboard');
 				} else if (res.type == "shop admin") {
+					//set the user with the shop id!!!!!
 					//To change color based on theme_color
 					//function lightenColor(color, percent) {
 					//    const num = parseInt(color.replace("#", ""), 16),
@@ -57,7 +58,7 @@ function Login() {
 					//--table - rows: hsl(243, 22 %, 81 %);
 					//--table - rows - hover: #9D9BC4;
 					//} 
-					navigate('/adminDashboard')
+					navigate('/admin/dashboard')
 				} else if (res.type == "user") {
 					navigate('/app')
 				}

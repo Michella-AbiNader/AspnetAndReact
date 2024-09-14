@@ -7,13 +7,11 @@ function CreateShop() {
     const [showConfirmation, setShowConfirmation] = useState(false)
     //const { user } = useContext(UserContext);
     const [res, setRes] = useState()
-    const [userRes, setUserRes] = useState()
-    const [showMessage, setShowMessage] = useState(false)
-    const [isUserCreated, setIsUSerCreated] = useState(false)
+    const [showMessage, setShowMessage] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState('');
     const [userId, setUserId] = useState("")
     const [userData, setUserData] = useState({
-        username: "", first_name: "", last_name: "", password: "", type: "shop admin"
+        Username: "", FirstName: "", LastName: "", Password: "", Type: "shop admin"
     })
     const [data, setData] = useState({
         name: "", category : "", image_url: "", theme_color: "", user_id: userId
@@ -65,31 +63,24 @@ function CreateShop() {
         e.preventDefault();
         setShowConfirmation(false);
     };
-    const handleUserConfirmSave = async (e) => {
+
+    const handleConfirmSave = async (e) => {
         e.preventDefault()
+        let response
         try {
-            var response = await registerUser(userData);
+            response = await registerUser(userData);
             if (response.token !== "") {
-                setIsUSerCreated(true)
-                setUserRes("User created successsfully!")
                 setUserId(response.id)
 
             }
         } catch (error) {
             console.log(error)
-            setUserRes("Couldn't create user!")
         }
-        setShowMessage(true)
-        setShowConfirmation(false)
-    }
-    const handleConfirmSave = async (e) => {
-        e.preventDefault()
-        let response
         try {
             response = await createShop(data);
-            setRes(response)
+            setRes({status: response.statue, message: response.message})
         } catch (error) {
-            setRes(response)
+            setRes({ status: response.statue, message: response.message })
             console.log(error);
         }
         setShowMessage(true)
@@ -98,81 +89,61 @@ function CreateShop() {
         for (let element of elements) {
             element.value = ""
         }
+        //reset user inputs
     }
     return (
         <>
-            <>
-                <form className="cr-f-container" onSubmit={handleConfirm}>
-                    <div className="header-Con">
-                        <p id="header" className="header">Create User</p>
-                        {showMessage && <p className={userRes == "User created successsfully!" ? "msg-box-tue" : "msg-box-false"}>{userRes}</p>
-                        }
-                    </div>
-                    <div className="form-container">
-                        <div>
-                            <label>Username:</label>
-                            <input className="product-input" autoComplete="off" maxLength="40"
-                                type="text" required
-                                name="username"
-                                placeholder="Username"
-                                onChange={handleUserInputChange}
-                                readOnly={isUserCreated}
-
-                            />
-                        </div>
-                        <div>
-                            <label>First Name: </label>
-                            <input className="product-input" autoComplete="off" maxLength="40"
-                                type="text" required
-                                name="first_name"
-                                placeholder="First Name"
-                                onChange={handleInputChange}
-                                readOnly={isUserCreated}
-
-                            />
-                        </div>
-                        <div>
-                            <label>Password: </label>
-                            <input className="product-input" autoComplete="off" maxLength="40"
-                                id={`${passwordStrength.toLowerCase()}`}
-                                type="password" required
-                                name="password"
-                                placeholder="Password"
-                                onChange={handleUserInputChange}
-                                readOnly={isUserCreated}
-                            />
-                        </div>
-                        <div>
-                            <label>Last Name: </label>
-                            <input className="product-input" autoComplete="off" maxLength="40"
-                                type="text" required
-                                name="last_name"
-                                placeholder="Last Name"
-                                onChange={handleUserInputChange}
-                                readOnly={isUserCreated}
-                            />
-                        </div>
-
-                    </div>
-                    <button className="cr-save" type="submit">Create</button>
-                    {showConfirmation && (
-                        <>
-                            <div className="overlay"></div>
-                            <div className="confirmation-box">
-                                <p>Are you sure you want to save these changes?</p>
-                                <button className="confirm-button" onClick={handleUserConfirmSave}>Yes, I am sure</button>
-                                <button className="cancel-button" onClick={handleCancel}>Cancel</button>
-                            </div>
-                        </>
-                    )}
-                </form>
-            </>
-      <form className="cr-f-container" onSubmit={handleConfirm}>
-            <div className="header-Con">
-                <p id="header" className="header">Create Shop</p>
+            <form className="cr-f-container" onSubmit={handleConfirm}>
+                <div className="header-Con">
+                    <p id="header" className="header">User Info</p>
                     {
-                        showMessage && <p className={res.status? "msg-box-true": "msg-box-false"}>{res.message}</p>
-              }
+                        showMessage && <p className={res.status ? "msg-box-true" : "msg-box-false"}>{res.message}</p>
+                    }
+                </div>
+                <div className="form-container">
+                    <div>
+                        <label>Username:</label>
+                        <input className="product-input" autoComplete="off" maxLength="40"
+                            type="text" required
+                            name="Username"
+                            placeholder="Username"
+                            onChange={handleUserInputChange}
+
+                        />
+                    </div>
+                    <div>
+                        <label>First Name: </label>
+                        <input className="product-input" autoComplete="off" maxLength="40"
+                            type="text" required
+                            name="FirstName"
+                            placeholder="First Name"
+                            onChange={handleInputChange}
+
+                        />
+                    </div>
+                    <div>
+                        <label>Password: </label>
+                        <input className="product-input" autoComplete="off" maxLength="40"
+                            id={`${passwordStrength.toLowerCase()}`}
+                            type="password" required
+                            name="Password"
+                            placeholder="Password"
+                            onChange={handleUserInputChange}
+                        />
+                    </div>
+                    <div>
+                        <label>Last Name: </label>
+                        <input className="product-input" autoComplete="off" maxLength="40"
+                            type="text" required
+                            name="LastName"
+                            placeholder="Last Name"
+                            onChange={handleUserInputChange}
+                        />
+                    </div>
+
+                </div>
+            <div className="header-Con">
+                <p id="header" className="header">Shop Info</p>
             </div>
             <div className="cr-form-container">
                 <div>
@@ -182,7 +153,6 @@ function CreateShop() {
                         name="name"
                         placeholder="Shop Name"
                             onChange={handleInputChange}
-                            readOnly={!isUserCreated}
                     />
                 </div>
                 <div>
@@ -192,7 +162,6 @@ function CreateShop() {
                         name="category"
                         placeholder="Category"
                             onChange={handleInputChange}
-                            readOnly={!isUserCreated}
                     />
                 </div>
                 <div>
@@ -202,7 +171,6 @@ function CreateShop() {
                         name="image_url"
                         placeholder="Image Url"
                             onChange={handleInputChange}
-                            readOnly={!isUserCreated}
                     />
                 </div>
                 <div>
@@ -212,18 +180,16 @@ function CreateShop() {
                         name="theme_color"
                         placeholder="Theme Color"
                             onChange={handleInputChange}
-                            readOnly={!isUserCreated}
-                            disabled={!isUserCreated} 
 
                     />
               </div>
           </div>
-          <button className="cr-save"type="submit">Create</button>
+          <button className="cr-save"type="submit">Create User & Shop</button>
           {showConfirmation && (
               <>
                   <div className="overlay"></div>
                   <div className="confirmation-box">
-                      <p>Are you sure you want to save these changes?</p>
+                      <p>Are you sure you want to create shop?</p>
                       <button className="confirm-button" onClick={handleConfirmSave}>Yes, I am sure</button>
                       <button className="cancel-button" onClick={handleCancel}>Cancel</button>
                   </div>

@@ -32,9 +32,17 @@ function NavBar() {
                                   <strong>{item.text}</strong>
                               </Link>
                       ): ""
-                  }</li>
+                      }
+                      {location.pathname.startsWith("/admin") ?
+                          item.type === "link" && (
+                              <Link to={item.url}
+                                  className={location.pathname === item.url ? "active" : ""}
+                              >
+                                  <strong>{item.text}</strong>
+                              </Link>
+                          ) : ""}
+                  </li>
               )) }
-
           </ul>
       </div>
   );

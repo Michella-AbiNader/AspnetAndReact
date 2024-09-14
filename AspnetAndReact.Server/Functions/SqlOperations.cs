@@ -76,7 +76,7 @@ namespace AspnetAndReact.Server.Functions
                     }
                 }
             }
-            catch (SqlException ex)
+           catch (SqlException ex)
             {
                 return false;
             }

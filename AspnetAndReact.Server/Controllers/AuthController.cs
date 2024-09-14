@@ -38,7 +38,7 @@ namespace AspnetAndReact.Server.Controllers
             }
             if(result.type == "shop admin")
             {
-                //fetch the theme color for the shop and send it with the response
+                //fetch the theme color and the shop id for the shop and send it with the response
             }
             var response2 = new
             {

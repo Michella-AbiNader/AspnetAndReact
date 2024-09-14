@@ -185,7 +185,7 @@ namespace AspnetAndReact.Server.Controllers
             var res = new
             {
                 status = false,
-                message = "Couldn't delete product. Wrong Id provided"
+                message = "Couldn't delete product."
 
             };
             return JsonConvert.SerializeObject(res);

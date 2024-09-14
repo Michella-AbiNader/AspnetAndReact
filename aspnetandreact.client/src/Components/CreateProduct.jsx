@@ -5,7 +5,8 @@ import { createProduct } from '../Services/ProductsServices'
 function CreateProduct() {
     const { shopId } = useParams();
     const [showConfirmation, setShowConfirmation] = useState(false)
-    const [res, setRes] = useState()
+    //const [res, setRes] = useState()
+    const [createResponse, setCreateResponse] = useState(null)
     const [categories, setCategories] = useState()
     const [showMessage, setShowMessage] = useState(false)
     const [data, setData] = useState({
@@ -51,9 +52,9 @@ function CreateProduct() {
         let response
         try {
             response = await createProduct(data);
-            setRes(response)
+            setCreateResponse({ status: response.status, message: response.message })
         } catch (error) {
-            setRes(response)
+            setCreateResponse({ status: response.status, message: response.message })
             console.log(error);
         }
         setShowMessage(true)
@@ -69,7 +70,7 @@ function CreateProduct() {
           <form className="cr-f-container" onSubmit={handleConfirm}>
           <div className="header-Con">
               <p id="header" className="header">Create Product</p>
-                  {showMessage && <p className={res.status ? "msg-box-true" : "msg-box-false"}>{res.mesasge}</p>
+                  {showMessage && <p className={createResponse.status ? "msg-box-true" : "msg-box-false"}>{createResponse.message}</p>
                   }
           </div>
           <div className="form-container">

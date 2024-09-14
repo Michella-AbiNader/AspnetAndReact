@@ -20,5 +20,27 @@
       "url": "/",
       "type": "link"
     }
+  ],
+  "shop_admin_navbar": [
+    {
+      "text": "Dashboard",
+      "url": "/admin/dashboard",
+      "type": "link"
+    },
+    {
+      "text": "Sales Reports",
+      "url": "/admin/sales",
+      "type": "link"
+    },
+    {
+      "text": "Shop Deatils",
+      "url": "/admin/shop",
+      "type": "link"
+    },
+    {
+      "text": "Logout",
+      "url": "/",
+      "type": "link"
+    }
   ]
 }

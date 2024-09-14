@@ -34,7 +34,12 @@ function ListTable({ list = [], setList, type, shopId="" }) {
 
             if (response.status) {
                 // If deletion was successful, update the list by filtering out the deleted item
-                setList(prevList => prevList.filter(item => item.id !== id));
+                if (filteredList.length == 1) {
+                    setList([])
+                } else {
+                    setList(prevList => prevList.filter(item => item.id !== id));
+
+                }
                 setRes({ status: response.status, message: response.message});
             } else {
                 setRes({ status: response.status, message: response.message });
