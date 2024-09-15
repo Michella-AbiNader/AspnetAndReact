@@ -148,7 +148,7 @@ function CreateProduct() {
                   <>
                       <div className="overlay"></div>
                       <div className="confirmation-box">
-                          <p>Are you sure you want to save these changes?</p>
+                          <p>Are you sure you want to create this product?</p>
                           <button className="confirm-button" onClick={handleConfirmSave}>Yes, I am sure</button>
                           <button className="cancel-button" onClick={handleCancel}>Cancel</button>
                       </div>

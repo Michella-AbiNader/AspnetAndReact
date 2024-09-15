@@ -5,6 +5,8 @@ import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../Components/UserContext'
 
+//To change color based on theme_color
+
 
 function Login() {
 	//javascript function to check password strength
@@ -25,39 +27,13 @@ function Login() {
 				if (res.type == "admin") {
 					navigate('/system-admin/dashboard');
 				} else if (res.type == "shop admin") {
-					//set the user with the shop id!!!!!
-					//To change color based on theme_color
-					//function lightenColor(color, percent) {
-					//    const num = parseInt(color.replace("#", ""), 16),
-					//        amt = Math.round(2.55 * percent),
-					//        R = (num >> 16) + amt,
-					//        G = (num >> 8 & 0x00FF) + amt,
-					//        B = (num & 0x0000FF) + amt;
-					//    return `#${(
-					//        0x1000000 +
-					//        (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 +
-					//        (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 +
-					//        (B < 255 ? B < 1 ? 0 : B : 255)
-					//    ).toString(16).slice(1).toUpperCase()}`;
-					//}
-					//useEffect(() => {
-					//    if (item.length > 0) {
-					//        const themeColor = item[0].theme_color;
-					//        if (themeColor) {
-					//            document.documentElement.style.setProperty('--mauve-light', lightenColor(themeColor, 20)); // Light variant
-					//            document.documentElement.style.setProperty('--mauve-bright', lightenColor(themeColor, -10)); // Bright variant
-					//        }
-					//    }
-					//}, [item]);
-					//    --mauve-light: #6A679E;
-					//--mauve - bright: #5D54A4;
-					//--button - color: #573b8a;
-					//--button - onHover: #6d44b8;
-					//--font: 'Jost', sans - serif;
-					//--table - header - words: black;
-					//--table - rows: hsl(243, 22 %, 81 %);
-					//--table - rows - hover: #9D9BC4;
-					//} 
+					setUser({
+						id: res.id, username: username, token: res.token,
+						type: res.type, shop_id: res.shop_id, theme_color: res.theme_color,
+						name: res.name, category: res.category, image_url: res.image_url
+					})
+
+					
 					navigate('/admin/dashboard')
 				} else if (res.type == "user") {
 					navigate('/app')
@@ -76,7 +52,7 @@ function Login() {
 	return (
 		<div className="Lcontainer">
 			<div className="container">
-			<h3 className="header">Login</h3>
+			<h3 className="lheader">Login</h3>
 				<form onSubmit={handleSubmit }>
 					<input className="input" type="text" autoComplete="off"
 						name="txt" maxLength="30"

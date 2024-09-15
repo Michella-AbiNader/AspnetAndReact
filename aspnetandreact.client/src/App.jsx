@@ -12,7 +12,8 @@ import SystemAdminCreateShop from '../src/Pages/SystemAdminCreateShop'
 import '../src/App.css'
 import SystemAdminCreateProduct from './Pages/SystemAdminCreateProduct';
 import SystemAdminCreateCategory from './Pages/SystemAdminCreateCategory'
-
+import AdminShopDeatils from './Pages/AdminShopDeatils';
+import ShopAdminSales from './Pages/ShopAdminSales';
 //import RankItems from '../src/RankItems'
 function App() {
 
@@ -27,10 +28,16 @@ function App() {
                     <Route path="/system-admin/createshop" element={<SystemAdminCreateShop />} />
                     <Route path="/system-admin/createproduct/:shopId" element={<SystemAdminCreateProduct />} />
                         <Route path="/system-admin/createcategory" element={<SystemAdminCreateCategory />} />
-                    <Route path="/admin/dashboard" element={<ShopAdminDashboard />} />
-                    <Route path="/app" element={<UserApp />} />
                     <Route path="/system-admin/shop/:id" element={<SystemAdminViewShop />} />
-                    <Route path="/system-admin/product/:id" element={<ViewProduct />} />
+                        <Route path="/system-admin/product/:id" element={<ViewProduct />} />
+
+                        <Route path="/admin/dashboard" element={<ShopAdminDashboard />} />
+                        <Route path="/admin/product/:id" element={<ViewProduct />} />
+                        <Route path="/admin/shop" element={<AdminShopDeatils />} />
+                        <Route path="/admin/createproduct/:shopId" element={<SystemAdminCreateProduct />} />
+                        <Route path="/admin/sales/" element={<ShopAdminSales />} />
+
+                        <Route path="/app" element={<UserApp />} />
 
             </Routes>
         </Router>

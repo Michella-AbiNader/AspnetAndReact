@@ -1,17 +1,19 @@
 /* eslint-disable react/prop-types */
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import '../Styles/ListTable.css';
 //import '../Components/DeleteButton'
 import DeleteButton from '../Components/DeleteButton';
 import { deleteShop } from '../Services/ShopServices';
 import { useNavigate } from 'react-router-dom';
 import { deleteProduct } from '../Services/ProductsServices';
+import UserContext from '../Components/UserContext'
 
 function ListTable({ list = [], setList, type, shopId="" }) {
     const [searchQuery, setSearchQuery] = useState('');
     const [res, setRes] = useState(null) 
     const [showMessage, setShowMessage] = useState(false)
     const navigate = useNavigate();
+    const { user } = useContext(UserContext);
 
     // Function to handle search input changes
     const handleSearchChange = (event) => {
@@ -53,15 +55,23 @@ function ListTable({ list = [], setList, type, shopId="" }) {
     };
     const handleViewClick = (id) => {
         if (type == "Shops") {
-            navigate(`/system-admin/shop/${id}`)
+                navigate(`/system-admin/shop/${id}`)
         } else {
-            navigate(`/system-admin/product/${id}`)
+            if (user.type == "shop admin") {
+                navigate(`/admin/product/${id}`)
+            } else {
+                navigate(`/system-admin/product/${id}`)
+            }
         }
 
     }
 
-    const handleCreateProduct = () =>{
-        navigate(`/system-admin/createproduct/${shopId}`)
+    const handleCreateProduct = () => {
+        if (user.type == "shop admin") {
+            navigate(`/admin/createproduct/${shopId}`)
+        } else {
+            navigate(`/system-admin/createproduct/${shopId}`)
+        }
     }
 
     return (

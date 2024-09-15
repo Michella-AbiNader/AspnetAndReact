@@ -27,3 +27,27 @@ export const loginUser = async (username, password) => {
         throw error;
     }
 };
+
+export const createUserShop = async (user, shop) => {
+    try {
+        const response = await axios.post(`${API_URL}/User/CreateUserAndShop`, {
+            "user": {
+                "username": user.Username,
+                "firstName": user.FirstName,
+                "lastName": user.LastName,
+                "password": user.Password,
+                "type": user.Type
+            },
+            "shop": {
+                "name": shop.name,
+                "category": shop.category,
+                "imageUrl": shop.image_url,
+                "themeColor": shop.theme_color
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error registering user:', error);
+        throw error;
+    }
+};

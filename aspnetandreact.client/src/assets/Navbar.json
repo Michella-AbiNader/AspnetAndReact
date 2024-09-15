@@ -28,6 +28,16 @@
       "type": "link"
     },
     {
+      "text": "Inventory",
+      "url": "/admin/inventory",
+      "type": "link"
+    },
+    {
+      "text": "Orders",
+      "url": "/admin/orders",
+      "type": "link"
+    },
+    {
       "text": "Sales Reports",
       "url": "/admin/sales",
       "type": "link"

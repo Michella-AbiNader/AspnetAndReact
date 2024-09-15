@@ -28,7 +28,8 @@
     gap: 10px; /* Adds spacing between items if needed */
 }
 .header {
-    color: var(--button-color)
+    color: var(--button-color);
+    font-size: 2em;
 }
 .Search-Bar {
     padding: 5px 12px;
@@ -43,7 +44,7 @@
     background-color: #f8f9fa;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-y: scroll !important
+    overflow-y: auto !important
 }
 .table {
     width: 100%;

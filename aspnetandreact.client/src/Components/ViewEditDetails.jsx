@@ -17,7 +17,7 @@ function ViewEditDetails({ item = [], type }) {
         if (item.length > 0) {
             setInitialData(item[0]);
         }
-    }, [item])
+    }, [item, initialData])
         ; 
     const fetchCategories = async () => {
         try {

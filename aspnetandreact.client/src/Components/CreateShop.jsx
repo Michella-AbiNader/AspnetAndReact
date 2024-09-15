@@ -1,20 +1,18 @@
 import { useState } from "react";
 //import UserContext from '../Components/UserContext'
 import '../Styles/CreateShop.css'
-import { registerUser } from '../Services/LoginRegister'
-import { createShop } from "../Services/ShopServices";
+import { createUserShop } from '../Services/LoginRegister'
 function CreateShop() {
     const [showConfirmation, setShowConfirmation] = useState(false)
     //const { user } = useContext(UserContext);
     const [res, setRes] = useState()
     const [showMessage, setShowMessage] = useState(false);
     const [passwordStrength, setPasswordStrength] = useState('');
-    const [userId, setUserId] = useState("")
     const [userData, setUserData] = useState({
         Username: "", FirstName: "", LastName: "", Password: "", Type: "shop admin"
     })
     const [data, setData] = useState({
-        name: "", category : "", image_url: "", theme_color: "", user_id: userId
+        name: "", category : "", image_url: "", theme_color: ""
     })
 
     const checkPasswordStrength = (password) => {
@@ -40,7 +38,7 @@ function CreateShop() {
     };
 
     const handleUserInputChange = (e) => {
-        if (e.target.name == "password") {
+        if (e.target.name == "Password") {
             checkPasswordStrength(e.target.value)
         }
             setUserData({
@@ -68,19 +66,11 @@ function CreateShop() {
         e.preventDefault()
         let response
         try {
-            response = await registerUser(userData);
-            if (response.token !== "") {
-                setUserId(response.id)
+            response = await createUserShop(userData, data);
+            setRes({ status: response.status, message: response.message })
 
-            }
         } catch (error) {
-            console.log(error)
-        }
-        try {
-            response = await createShop(data);
-            setRes({status: response.statue, message: response.message})
-        } catch (error) {
-            setRes({ status: response.statue, message: response.message })
+            setRes({ status: response.status, message: response.message })
             console.log(error);
         }
         setShowMessage(true)
@@ -89,7 +79,10 @@ function CreateShop() {
         for (let element of elements) {
             element.value = ""
         }
-        //reset user inputs
+        var userElements = document.getElementsByClassName("product-input")
+        for (let element of userElements) {
+            element.value = ""
+        }
     }
     return (
         <>
@@ -117,7 +110,7 @@ function CreateShop() {
                             type="text" required
                             name="FirstName"
                             placeholder="First Name"
-                            onChange={handleInputChange}
+                            onChange={handleUserInputChange}
 
                         />
                     </div>

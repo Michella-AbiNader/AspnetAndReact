@@ -38,8 +38,8 @@
     height: 350px
 }
 
-.header {
-    color: var(--login-button-color);
+.lheader {
+    color: #573b8a;
     font-size: 2em;
 }
 form {
