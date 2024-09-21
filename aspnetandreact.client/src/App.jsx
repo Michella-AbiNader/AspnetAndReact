@@ -14,6 +14,8 @@ import SystemAdminCreateProduct from './Pages/SystemAdminCreateProduct';
 import SystemAdminCreateCategory from './Pages/SystemAdminCreateCategory'
 import AdminShopDeatils from './Pages/AdminShopDeatils';
 import ShopAdminSales from './Pages/ShopAdminSales';
+import ShopAdminInventory from './Pages/ShopAdminInventory'
+import ShopAdminOrders from './Pages/ShopAdminOrders'
 //import RankItems from '../src/RankItems'
 function App() {
 
@@ -35,7 +37,9 @@ function App() {
                         <Route path="/admin/product/:id" element={<ViewProduct />} />
                         <Route path="/admin/shop" element={<AdminShopDeatils />} />
                         <Route path="/admin/createproduct/:shopId" element={<SystemAdminCreateProduct />} />
-                        <Route path="/admin/sales/" element={<ShopAdminSales />} />
+                        <Route path="/admin/sales" element={<ShopAdminSales />} />
+                        <Route path="/admin/inventory" element={<ShopAdminInventory />} />
+                        <Route path="/admin/orders" element={<ShopAdminOrders />} />
 
                         <Route path="/app" element={<UserApp />} />
 

@@ -158,7 +158,9 @@ function ViewEditDetails({ item = [], type }) {
                                 name="name"
                                 placeholder={initialData.name || ''}
                                 onChange={handleInputChange}
-                                readOnly={!isEditing}
+                                    readOnly={!isEditing}
+                                    value={data.name || initialData.name || ''}
+
                             />
                         </div>
                         <div>
@@ -168,7 +170,9 @@ function ViewEditDetails({ item = [], type }) {
                                 name="category"
                                     placeholder={initialData.category || ''}
                                 onChange={handleInputChange}
-                                readOnly={!isEditing}
+                                    readOnly={!isEditing}
+                                    value={data.category || initialData.category || ''}
+
                             />
                         </div>
                         <div>
@@ -178,7 +182,9 @@ function ViewEditDetails({ item = [], type }) {
                                 name="image_url"
                                 placeholder={initialData.image_url || ''}
                                 onChange={handleInputChange}
-                                readOnly={!isEditing}
+                                    readOnly={!isEditing}
+                                    value={data.image_url || initialData.image_url || ''}
+
                             />
                         </div>
                         <div>
@@ -190,7 +196,7 @@ function ViewEditDetails({ item = [], type }) {
                                     value={data.theme_color || initialData.theme_color || ''}
                                     onChange={handleInputChange}
                                     readOnly={!isEditing}
-                                    disabled={!isEditing} 
+                                    disabled={!isEditing}
                             />
                         </div>
                         <div>
@@ -221,6 +227,7 @@ function ViewEditDetails({ item = [], type }) {
                                     placeholder={initialData.name || ''}
                                     onChange={handleInputChange}
                                     readOnly={!isEditing}
+                                    value={productData.name || initialData.name || ''}
                                 />
                             </div>
                             <div>
@@ -231,6 +238,8 @@ function ViewEditDetails({ item = [], type }) {
                                     placeholder={initialData.price || ''}
                                     onChange={handleInputChange}
                                     readOnly={!isEditing}
+                                    value={productData.price || initialData.price || ''}
+
                                 />
                             </div>
                             
@@ -242,6 +251,8 @@ function ViewEditDetails({ item = [], type }) {
                                     placeholder={initialData.image_url || ''}
                                     onChange={handleInputChange}
                                     readOnly={!isEditing}
+                                    value={productData.image_url || initialData.image_url || ''}
+
                                 />
                             </div>
                             <div>
@@ -252,6 +263,8 @@ function ViewEditDetails({ item = [], type }) {
                                     placeholder={initialData.quantity || ''}
                                     onChange={handleInputChange}
                                     readOnly={!isEditing}
+                                    value={productData.quantity || initialData.quantity|| ''}
+
                                 />
                             </div>
                             
@@ -264,6 +277,8 @@ function ViewEditDetails({ item = [], type }) {
                                     placeholder={initialData.description || ''}
                                     onChange={handleInputChange}
                                     readOnly={!isEditing}
+                                    value={productData.description || initialData.description || ''}
+
                                 ></textarea>
                             </div>
                             <div>
@@ -280,8 +295,8 @@ function ViewEditDetails({ item = [], type }) {
                                         <select className="product-input" id="drpdown-input"
                                             name="category"
                                             onChange={handleInputChange}
-                                            value={productData.category_id}
                                         >
+                                        <option>--Select Category</option>
                                             {categories.length > 0 ? (
                                                 categories.map((cat) => (
                                                     <option value={cat.id} key={cat.id} >

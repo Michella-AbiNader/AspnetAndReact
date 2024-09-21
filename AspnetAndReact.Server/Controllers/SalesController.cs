@@ -124,7 +124,8 @@ namespace AspnetAndReact.Server.Controllers
                 " o.quantity, o.location, o.date_of_order, " +
                 "o.status FROM orders o JOIN users u ON o.user_id = u.id " +
                 "JOIN products p ON o.product_id = p.id " +
-                "JOIN shops s ON o.shop_id = s.id WHERE o.shop_id = @shop_id GROUP BY o.id " +
+                "JOIN shops s ON o.shop_id = s.id WHERE o.shop_id = @shop_id " +
+                "GROUP BY o.id, u.username, p.name, o.quantity, o.location, o.date_of_order, o.status " +
                 "ORDER BY o.date_of_order DESC;";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@shop_id", shopId);
@@ -144,7 +145,7 @@ namespace AspnetAndReact.Server.Controllers
         {
             string query = "SELECT p.id AS product_id, p.name AS product_name, " +
                 "p.quantity AS available_stock, p.price AS product_price FROM products p " +
-                "WHERE o.shop_id = @shop_id  ORDER BY p.name;";
+                "WHERE p.shop_id = @shop_id  ORDER BY p.name;";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@shop_id", shopId);
             var response = sql.sqlToDataTable(query, sqlParam);
