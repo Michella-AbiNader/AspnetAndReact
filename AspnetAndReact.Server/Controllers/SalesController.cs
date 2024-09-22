@@ -67,10 +67,10 @@ namespace AspnetAndReact.Server.Controllers
         [HttpGet]
         public string BestSellingProducts(int shopId)
         {
-            string query = "SELECT p.name, SUM(o.quantity) AS units_sold " +
+            string query = "SELECT TOP 10 p.name, SUM(o.quantity) AS units_sold " +
                 "FROM orders o JOIN products p ON o.product_id = p.id " +
                 "WHERE o.shop_id = @shop_id GROUP BY p.name " +
-                "ORDER BY units_sold DESC LIMIT 10;";
+                "ORDER BY units_sold DESC;";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@shop_id", shopId);
             var response = sql.sqlToDataTable(query, sqlParam);
@@ -126,7 +126,7 @@ namespace AspnetAndReact.Server.Controllers
                 "JOIN products p ON o.product_id = p.id " +
                 "JOIN shops s ON o.shop_id = s.id WHERE o.shop_id = @shop_id " +
                 "GROUP BY o.id, u.username, p.name, o.quantity, o.location, o.date_of_order, o.status " +
-                "ORDER BY o.date_of_order DESC;";
+                "ORDER BY o.date_of_order Asc;";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@shop_id", shopId);
             var response = sql.sqlToDataTable(query, sqlParam);

@@ -18,26 +18,20 @@ function ShopAdminDashboard() {
             }
         };
         //set the user with the shop id!!!!!
-        var themeColor = user.tehme_color
-       // document.documentElement.style.setProperty('--mauve-light', themeColor); // Light variant
-        //document.documentElement.style.setProperty('--mauve-bright', lightenColor(themeColor, -10)); // Light variant
-        //document.documentElement.style.setProperty('--button-color', themeColor); // Light variant
-        //document.documentElement.style.setProperty('--button-hover', lightenColor(themeColor, -10)); // Light variant
-        //document.documentElement.style.setProperty('--table-rows', lightenColor(themeColor, 10)); // Light variant
-        //document.documentElement.style.setProperty('--table-rows-hover', lightenColor(themeColor, 20)); // Light variant
-        //document.documentElement.style.setProperty('--navbar-hover-active', lightenColor(themeColor, -20)); // Light variant
+        if (user && user.theme_color) {
+            var themeColor = user.theme_color
+            localStorage.setItem('theme_color', themeColor); // Store theme color in local storage
 
-        //    --mauve-light: #6A679E;
-        //--mauve - bright: #5D54A4;
-        //--button - color: #573b8a;
-        //--button - onHover: #6d44b8;
-        //--table - header - words: black;
-        //--table - rows: hsl(243, 22 %, 81 %);
-        //--table - rows - hover: #9D9BC4;
-        //--navbar-hover-active
-        //} 
+            document.documentElement.style.setProperty('--mauve-light', themeColor); // Light variant
+            document.documentElement.style.setProperty('--mauve-bright', lightenColor(themeColor, -5)); // Light variant
+            document.documentElement.style.setProperty('--button-color', themeColor); // Light variant
+            document.documentElement.style.setProperty('--button-onHover', lightenColor(themeColor, 20)); // Light variant
+            document.documentElement.style.setProperty('--table-rows-hover', lightenColor(themeColor, 10)); // Light variant
+            document.documentElement.style.setProperty('--table-rows', lightenColor(themeColor, 30)); // Light variant
+            document.documentElement.style.setProperty('--navbar-hover-active', lightenColor(themeColor, -20)); // Light variant
+        }
         fetchProducts();
-    }); // Dependency array ensures this only runs when `id` changes
+    }, [user]); // Dependency array ensures this only runs when `id` changes
     return (
       <>
       <NavBar />

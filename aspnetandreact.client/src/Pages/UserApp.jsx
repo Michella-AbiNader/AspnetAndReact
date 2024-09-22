@@ -1,17 +1,11 @@
 import UserContext from "../Components/UserContext";
 import { useContext } from 'react';
-
+import NavBar from "../Components/NavBar";
 function UserApp() {
     const { user } = useContext(UserContext)
     console.log(user);
     return (
-      <div>
-      <p>{user.id}</p>
-      <p>{user.token}</p>
-      <p>{user.type}</p>
-      <p>{user.username}</p>
-        </div>
-
+    <NavBar/>
   );
 }
 

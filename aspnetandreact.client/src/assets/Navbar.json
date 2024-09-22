@@ -52,5 +52,27 @@
       "url": "/",
       "type": "link"
     }
+  ],
+  "user_navbar": [
+    {
+      "text": "Browse Shops",
+      "url": "/app/shops",
+      "type": "link"
+    },
+    {
+      "text": "Browse Products",
+      "url": "/app/products",
+      "type": "link"
+    },
+    {
+      "text": "Setttings",
+      "url": "/app/settings",
+      "type": "link"
+    },
+    {
+      "text": "Logout",
+      "url": "/",
+      "type": "link"
+    }
   ]
 }

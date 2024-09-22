@@ -59,7 +59,7 @@ export const createProduct = async (product) => {
             Name: product.name,
             Description: product.description,
             Price: product.price,
-            Qunatity: product.quantity,
+            Quantity: product.quantity,
             ImageUrl: product.image_url,
             CategoryId: product.category_id,
             ShopId: product.shop_id

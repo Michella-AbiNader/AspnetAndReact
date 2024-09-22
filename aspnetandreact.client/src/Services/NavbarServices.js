@@ -6,6 +6,8 @@ function getNavbarData(location, setNavbarItems) {
             return setNavbarItems(NavbarData.system_admin_navbar)
         } else if (location.pathname.startsWith("/admin")) {
             return setNavbarItems(NavbarData.shop_admin_navbar)
+        } else if (location.pathname.startsWith("/app")) {
+            return setNavbarItems(NavbarData.user_navbar)
         }
     } catch (error) {
         return console.log(error)

@@ -23,7 +23,7 @@ body{
     background-color: var(--mauve-bright)
 }
 
-    .Navbar-Container ul {
+    .Navbar-Container ul, .Navbar-Container button {
         height: 50px;
         display: flex;
         flex-direction: row; 
@@ -32,13 +32,13 @@ body{
         
 }
 
-    .Navbar-Container li {
+    .Navbar-Container li, .Navbar-Container button {
         height: 50px;
         list-style: none; 
     }
 
 
-    .Navbar-Container a {
+    .Navbar-Container a, .Navbar-Container button {
         display: block;
         text-align: center;
         padding-top: 10px;
@@ -60,3 +60,13 @@ body{
             background-color: var(--navbar-hover-active);
             font-size: 1.2em;
         }
+.logout {
+    width:auto;
+    border-radius:0px;
+    background-color: var(--mauve-bright);
+}
+    .logout:hover {
+        color: var(--navbar-color-hover);
+        background-color: var(--navbar-hover-active);
+        font-size: 1.2em;
+    }

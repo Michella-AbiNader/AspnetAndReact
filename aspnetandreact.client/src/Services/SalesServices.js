@@ -47,3 +47,47 @@ export const getOrdersLocations = async (shopId) => {
         throw error;
     }
 };
+export const getTotalSales = async (shopId) => {
+    try {
+        const response = await axios.get(`${API_URL}/Sales/TotalSales`, {
+            params: { shopId: shopId }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting orders:', error);
+        throw error;
+    }
+};
+export const getSalesByProduct = async (shopId) => {
+    try {
+        const response = await axios.get(`${API_URL}/Sales/SalesByProduct`, {
+            params: { shopId: shopId }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting sales by prod:', error);
+        throw error;
+    }
+};
+export const getMonthlySales = async (shopId) => {
+    try {
+        const response = await axios.get(`${API_URL}/Sales/MonthlySales`, {
+            params: { shopId: shopId }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting orders:', error);
+        throw error;
+    }
+};
+export const getBestSellingProducts = async (shopId) => {
+    try {
+        const response = await axios.get(`${API_URL}/Sales/BestSellingProducts`, {
+            params: { shopId: shopId }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error getting orders:', error);
+        throw error;
+    }
+};

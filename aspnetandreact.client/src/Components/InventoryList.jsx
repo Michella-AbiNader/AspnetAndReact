@@ -2,7 +2,6 @@
 import { useState, useContext, useEffect } from 'react';
 import { getShopInventory } from '../Services/SalesServices';
 import UserContext from '../Components/UserContext';
-import '../Styles/ShopAdminInventory.css';
 
 function InventoryList() {
     const { user } = useContext(UserContext);

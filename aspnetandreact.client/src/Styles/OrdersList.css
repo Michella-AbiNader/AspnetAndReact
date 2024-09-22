@@ -1,0 +1,15 @@
+.filter {
+    margin-right: 10px;
+    border: 2px solid #ddd;
+    outline: none;
+    border-radius: 4px;
+    height: 30px;
+}
+.filter:focus {
+    border: 2px solid;
+    border-color: var(--button-color);
+    outline: none
+}
+.Search-Bar {
+    margin-right:15px;
+}

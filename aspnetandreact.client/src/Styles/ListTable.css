@@ -121,10 +121,10 @@
     cursor: pointer;
 }
 
-.edit-button:hover {
-    background: #6d44b8;
-    font-weight: 700;
-}
+    .edit-button:hover {
+        background: var(--button-onHover);
+        font-weight: 700;
+    }
 .createButton {
     height: 30px;
     display: flex;
@@ -145,7 +145,7 @@
 
     .createButton:hover {
         width: 150px;
-        background: #6d44b8;
+        background: var(--button-onHover);
     }
 
         .createButton:hover p {
