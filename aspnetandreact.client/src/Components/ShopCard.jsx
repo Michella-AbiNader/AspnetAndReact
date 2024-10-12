@@ -6,7 +6,7 @@ function ShopCard({ shop }) {
     const navigate = useNavigate();
 
     const handleViewProductsClick = () => {
-        navigate(`/shop/${shop.id}/products`); 
+        navigate(`/app/${shop.name}/${shop.id}/products`); 
     };
     return (
         <div className="shop-card">

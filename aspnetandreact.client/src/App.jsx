@@ -49,8 +49,8 @@ function App() {
                         <Route path="/admin/inventory" element={<ShopAdminInventory />} />
                         <Route path="/admin/orders" element={<ShopAdminOrders />} />
 
-                        <Route path="/app" element={<UserApp />} />
-                        <Route path="/shop/:shopId/products" element={<ShopProducts />} />
+                        <Route path="/app/shops" element={<UserApp />} />
+                        <Route path="/app/:shopName/:shopId/products" element={<ShopProducts />} />
 
 
             </Routes>

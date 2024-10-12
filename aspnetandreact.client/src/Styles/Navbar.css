@@ -20,7 +20,7 @@ body{
     width: 100vw;
     position: sticky;
     height: 50px;
-    background-color: var(--mauve-bright)
+    background-color: var(--button-color)
 }
 
     .Navbar-Container ul, .Navbar-Container button {
@@ -52,12 +52,12 @@ body{
         .Navbar-Container a:hover {
             text-decoration: none;
             color: var(--navbar-color-hover);
-            background-color: var(--navbar-hover-active);
+            background-color: var(--button-onHover);
         }
         .Navbar-Container a.active {
             text-decoration: none;
             color: var(--navbar-color-hover);
-            background-color: var(--navbar-hover-active);
+            background-color: var(--button-onHover);
             font-size: 1.2em;
         }
 .logout {

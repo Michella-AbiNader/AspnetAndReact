@@ -96,7 +96,6 @@ function UserApp() {
                     <p>No shops available</p>
                 )}
             </div>
-            {/* Cart Button */}
             <button className="cart-button" onClick={toggleCart}>
                 Cart
             </button>
