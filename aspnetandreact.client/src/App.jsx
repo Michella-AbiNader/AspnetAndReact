@@ -17,6 +17,7 @@ import AdminShopDeatils from './Pages/AdminShopDeatils';
 import ShopAdminSales from './Pages/ShopAdminSales';
 import ShopAdminInventory from './Pages/ShopAdminInventory'
 import ShopAdminOrders from './Pages/ShopAdminOrders'
+import ShopProducts from './Pages/ShopProducts'
 //import RankItems from '../src/RankItems'
 function App() {
     useEffect(() => {
@@ -49,6 +50,8 @@ function App() {
                         <Route path="/admin/orders" element={<ShopAdminOrders />} />
 
                         <Route path="/app" element={<UserApp />} />
+                        <Route path="/shop/:shopId/products" element={<ShopProducts />} />
+
 
             </Routes>
         </Router>

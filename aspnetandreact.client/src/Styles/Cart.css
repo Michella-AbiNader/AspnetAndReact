@@ -1,0 +1,82 @@
+/* Cart button styling */
+.cart-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    z-index: 1001;
+    border: 1px solid var(--button-color);
+    height: 60px;
+    width: 60px;
+    padding: 0;
+    transition: all 0.3s ease;
+}
+
+    .cart-button:hover {
+        background-color: var(--button-onHover);
+        border: 1px solid var(--button-onHover);
+    }
+
+/* Main content layout */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+/* When the cart is open, reduce the width of main content */
+.cart-open {
+    width: calc(100% - 300px); /* Adjust width when cart is open */
+    margin-right: 300px; /* Shift content to the left */
+}
+    /* When the cart is open, move the cart button as well */
+    .cart-open .cart-button {
+        right: 320px; /* Shift the button to the left when the cart opens */
+    }
+
+/* Cart panel */
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%; /* Adjust height based on the navbar's height */
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    padding: 20px;
+    overflow-y: auto;
+    position:fixed
+}
+
+/* Mobile styling */
+@media (max-width: 768px) {
+    .main-content {
+        width: 100%; /* Full width on mobile */
+        margin-right: 0;
+    }
+
+    .cart-open {
+        width: 70%; /* Prevent shifting content on mobile */
+    }
+
+    .cart-panel {
+        width: 70%; /* Full width for cart on mobile */
+    }
+
+    .cart-open .cart-button {
+        right: 20px; /* Keep button in place on mobile */
+    }
+    .cart-open .cart-button {
+        right: 300px; /* Shift the button to the left when the cart opens */
+    }
+}

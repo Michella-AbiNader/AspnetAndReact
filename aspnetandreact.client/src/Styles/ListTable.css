@@ -35,9 +35,12 @@
     padding: 5px 12px;
     font-size: 16px;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 2px solid #ccc;
     width: 250px;
 }
+    .Search-Bar:focus {
+        border: 2px solid var(--button-color);
+    }
 .table-container {
     width: 100%;
     padding: 20px;

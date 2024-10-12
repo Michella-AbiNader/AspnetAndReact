@@ -11,7 +11,9 @@
   <ItemGroup>
     <None Remove="src\Components\EditButton.jsx" />
     <None Remove="src\Components\SystemAdminNavbar.jsx" />
+    <None Remove="src\Components\ViewShop.jsx" />
     <None Remove="src\Services\SalesServices.jsx" />
+    <None Remove="src\Styles\StyleSheet.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\Components\" />
