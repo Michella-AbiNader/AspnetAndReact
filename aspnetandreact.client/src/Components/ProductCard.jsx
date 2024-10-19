@@ -7,8 +7,7 @@ function ProductCard({ product, onAddToCart }) {
     const navigate = useNavigate();
 
     const handleViewClick = () => {
-        // Assuming you have a product details page
-        navigate(`/product/${product.id}`);
+        navigate(`/app/${product.name}/${product.id}`);
     };
 
     return (

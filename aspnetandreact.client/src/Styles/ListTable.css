@@ -1,14 +1,3 @@
-/*hsl(243, 22%, 51%)*/
-:root {
-    --mauve-light: #6A679E;
-    --mauve-bright: #5D54A4;
-    --button-color: #573b8a;
-    --button-onHover: #6d44b8;
-    --font: 'Jost', sans-serif;
-    --table-header-words: black;
-    --table-rows: hsl(243, 22%, 81%);
-    --table-rows-hover: #9D9BC4;
-}   
 * {
     margin: 0;
     padding: 0;

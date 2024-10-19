@@ -36,7 +36,7 @@ function Login() {
 					
 					navigate('/admin/dashboard')
 				} else if (res.type == "user") {
-					navigate('/app')
+					navigate('/app/shops')
 				}
 			}
 		} catch (error) {

@@ -14,7 +14,9 @@ namespace AspnetAndReact.Server.Controllers
         [HttpGet]
         public string Get()
         {
-            string query = "SELECT * FROM products";
+            string query = "SELECT products.id, products.name, products.description, products.price, " +
+                "products.image_url, products.shop_id, category.name AS category FROM products JOIN category ON " +
+                "products.category_id = category.id";
             SqlOperations sql = new SqlOperations();
             var response = sql.sqlToDataTable(query);
             DataTable dataTable = response.dt;

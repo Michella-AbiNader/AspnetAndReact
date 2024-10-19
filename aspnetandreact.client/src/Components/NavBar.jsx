@@ -5,13 +5,13 @@ import { getNavbarData } from '../Services/NavbarServices'
 import '../Styles/Navbar.css'
 
 function resetThemeToDefault() {
-    document.documentElement.style.setProperty('--mauve-light', '#6A679E');  // Default light variant
-    document.documentElement.style.setProperty('--mauve-bright', '#5D54A4');  // Default bright variant
-    document.documentElement.style.setProperty('--button-color', '#573b8a');  // Default button color
-    document.documentElement.style.setProperty('--button-onHover', '#6d44b8');  // Default button hover
-    document.documentElement.style.setProperty('--table-rows', '#c5c4d9');    // Default table row color
-    document.documentElement.style.setProperty('--table-rows-hover', '#9D9BC4'); // Default table hover
-    document.documentElement.style.setProperty('--navbar-hover-active', '#6d68cf'); // Default navbar hover
+    document.documentElement.style.setProperty('--mauve-light', '#6A679E');  
+    document.documentElement.style.setProperty('--mauve-bright', '#573b8a');  
+    document.documentElement.style.setProperty('--button-color', '#573b8a');  
+    document.documentElement.style.setProperty('--button-onHover', '#6d44b8');
+    document.documentElement.style.setProperty('--table-rows', '#c5c4d9');    
+    document.documentElement.style.setProperty('--table-rows-hover', '#9D9BC4'); 
+    document.documentElement.style.setProperty('--navbar-hover-active', '#6d68cf'); 
 }
 
 function NavBar() {

@@ -70,3 +70,12 @@ export const createProduct = async (product) => {
         throw error;
     }
 };
+export const getProducts = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/Product/Get`);
+        return response.data;
+    } catch (error) {
+        console.error('Error getting products:', error);
+        throw error;
+    }
+};

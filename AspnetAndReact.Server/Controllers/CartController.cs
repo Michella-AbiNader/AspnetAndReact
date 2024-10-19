@@ -76,3 +76,32 @@ namespace AspnetAndReact.Server.Controllers
         }
     }
 }
+
+//for upsert
+//--If the product already exists in the user's cart, update the quantity
+//IF EXISTS (SELECT 1 FROM cart WHERE user_id = @user_id AND product_id = @product_id)
+//BEGIN
+//    -- Update the quantity for the existing product in the cart
+//    UPDATE cart
+//    SET quantity = quantity + @increment_quantity -- or simply `+ 1` if you're always adding 1
+//    WHERE user_id = @user_id AND product_id = @product_id;
+//END
+//ELSE
+//BEGIN
+//    -- Insert the new product into the cart if it doesn't exist
+//    INSERT INTO cart (user_id, product_id, shop_id, quantity)
+//    VALUES (@user_id, @product_id, @shop_id, @initial_quantity); --Default initial quantity can be 1
+//END
+
+//    for merge:
+//    MERGE cart AS target
+//USING (VALUES (@user_id, @product_id, @shop_id, @quantity)) AS source (user_id, product_id, shop_id, quantity)
+//ON target.user_id = source.user_id AND target.product_id = source.product_id
+//WHEN MATCHED THEN
+//    -- If the product already exists, update the quantity
+//    UPDATE SET target.quantity = target.quantity + source.quantity
+//WHEN NOT MATCHED THEN
+//    -- If the product does not exist, insert it into the cart
+//    INSERT (user_id, product_id, shop_id, quantity)
+//    VALUES (source.user_id, source.product_id, source.shop_id, source.quantity);
+

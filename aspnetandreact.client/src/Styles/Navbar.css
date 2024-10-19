@@ -1,9 +1,9 @@
 :root {
     --mauve-light: #6A679E;
-    --mauve-bright: #5D54A4;
+    --mauve-bright: #573b8a;
     --button-color: #573b8a;
     --button-onHover: #6d44b8;
-    --font: 'Jost', sans-serif;
+    --font: 'Jost', sans-serif;  
     --table-header-words: black;
     --table-rows: hsl(243, 22%, 81%);
     --table-rows-hover: #9D9BC4;
@@ -70,3 +70,9 @@ body{
         background-color: var(--navbar-hover-active);
         font-size: 1.2em;
     }
+
+@media (max-width: 768px) {
+    .Navbar-Container, .Navbar-Container ul, .Navbar-Container a, .Navbar-Container li{
+        height: auto;
+    }
+}

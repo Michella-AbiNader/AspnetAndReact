@@ -23,8 +23,8 @@
 }
 
 .shop-info {
-  /*  padding: 10px;*/
-    color: #573b8a
+    /*  padding: 10px;*/
+    color: var(--mauve-bright)
 }
 
     .shop-info h3 {
