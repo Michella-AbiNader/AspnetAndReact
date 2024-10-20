@@ -1,10 +1,14 @@
 // ShopProducts.jsx
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { getProductsByShopId } from '../Services/ProductsServices'; // Your service function to fetch products
 import NavBar from '../Components/NavBar';
 import ProductCard from '../Components/ProductCard'
 import Cart from '../Components/Cart'
+import { upsertCart } from '../Services/CartServices'
+import UserContext from '../Components/UserContext';
+
+
 function ShopProducts() {
     const { shopName, shopId } = useParams(); // Get shopId from the URL
     const [products, setProducts] = useState([]);
@@ -13,6 +17,10 @@ function ShopProducts() {
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchQuery, setSearchQuery] = useState('');
+    const { user } = useContext(UserContext);
+    const [showMessage, setShowMessage] = useState(false)
+    const [res, setRes] = useState({ status: false, message: "An error occured" })
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -36,7 +44,6 @@ function ShopProducts() {
         setFilteredProducts(filtered);
     }, [selectedCategory, products]);
 
-    // Filter based on search query within the filtered shops
     useEffect(() => {
         if (products) {
             const filtered = products.filter(shop =>
@@ -55,10 +62,24 @@ function ShopProducts() {
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
     };
-    const handleAddToCart = (productId) => {
-        // Add to cart functionality
-        console.log(`Product ${productId} added to cart`);
-        // Here you would typically call your add to cart function or update cart state
+    const handleAddToCart = async (product_id) => {
+        const product = products.find((p) => p.id === product_id);
+
+        if (product) {
+            const shop_id = product.shop_id;
+            var quantity = "1"
+            var user_id = user.id
+            try {
+                var response = await upsertCart({ user_id, product_id, shop_id, quantity }); // Adjust the payload as needed
+                setRes({ status: response.status, message: response.message })
+            } catch (error) {
+                console.log('Error adding to cart:', error);
+            }
+        } else {
+            console.log('Product not found');
+        }
+        setShowMessage(true)
+
     };
     const toggleCart = () => {
         setIsCartOpen(!isCartOpen); // Toggle cart visibility
@@ -68,6 +89,9 @@ function ShopProducts() {
             <NavBar />
             <div className="header-Container">
                 <p className="header">{shopName} </p>
+                {showMessage && <p className={res.status ? "msg-box-true2" : "msg-box-false2"}>
+                    {res.message}</p>
+                }
                 <div className="filter-Container">
                     <select
                         value={selectedCategory}

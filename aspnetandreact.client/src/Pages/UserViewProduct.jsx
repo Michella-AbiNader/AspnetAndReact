@@ -1,16 +1,22 @@
 // UserViewProduct.jsx
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import NavBar from '../Components/NavBar';
 import { getProductById } from '../Services/ProductsServices';
 import '../Styles/UserViewProduct.css';
 import Cart from '../Components/Cart';
+import UserContext from '../Components/UserContext';
+import { upsertCart } from '../Services/CartServices'
+
 
 function UserViewProduct() {
     const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [showCart, setShowCart] = useState(false);
     const [quantity, setQuantity] = useState(1); 
+    const { user } = useContext(UserContext);
+    const [showMessage, setShowMessage] = useState(false)
+    const [res, setRes] = useState({ status: false, message: "An error occured" })
 
 
     useEffect(() => {
@@ -27,8 +33,17 @@ function UserViewProduct() {
         fetchProduct();
     }, [productId]);
 
-    const handleAddToCart = () => {
-        // Add to cart logic
+    const handleAddToCart = async () => {
+        const product_id = productId
+        const shop_id = product.shop_id;
+        var user_id = user.id
+        try {
+            var response = await upsertCart({ user_id, product_id, shop_id, quantity }); // Adjust the payload as needed
+            setRes({ status : response.status, message : response.message})
+        } catch (error) {
+            console.log('Error adding to cart:', error);
+        }
+        setShowMessage(true)
     };
 
     const toggleCart = () => {
@@ -53,7 +68,10 @@ function UserViewProduct() {
                             </div>
                             <div className="product-info-wrapper">
                             <div className="header-wrapper">
-                                <h2 className="header">{product.name}</h2>
+                                    <h2 className="header">{product.name}</h2>
+                                    {showMessage && <p className={res.status ? "msg-box-true" : "msg-box-false"}>
+                                        {res.message}</p>
+                                    }
                                 </div>
                                 <h2><strong>${product.price}</strong> </h2>
                                 <br></br>

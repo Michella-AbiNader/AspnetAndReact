@@ -1,7 +1,7 @@
 // ProductCard.jsx
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import '../Styles/ProductCard.css'; // Add styles for the product card
+import '../Styles/ProductCard.css'; 
 
 function ProductCard({ product, onAddToCart }) {
     const navigate = useNavigate();
@@ -9,7 +9,6 @@ function ProductCard({ product, onAddToCart }) {
     const handleViewClick = () => {
         navigate(`/app/${product.name}/${product.id}`);
     };
-
     return (
         <div className="product-card">
             <img src={product.image_url} alt={product.name} className="product-image" />

@@ -20,7 +20,7 @@
 .product-image-wrapper {
     flex: 1;
     max-width: 400px; 
-    max-height: 400px;
+    max-height: 600px;
 }
 
 .product-img {
@@ -42,8 +42,8 @@
     }
 
     .product-info-wrapper p {
-        margin-bottom: 15px;
-        font-size: 16px;
+/*        margin-bottom: 15px;
+*/        font-size: 16px;
     }
 .quantity-selector {
     display: flex;
@@ -75,4 +75,40 @@
     .cart-open .product-details-container {
         margin-right: 0;
     }
+}
+
+.msg-box-true2 {
+    position: fixed; /* Fix the element to the viewport */
+    top: 10px; /* Distance from the top of the screen */
+    left: 50%; /* Horizontally center the element */
+    transform: translateX(-50%); /* Offset to center the element */
+    z-index: 1000; /* Make sure it's on top of other elements */
+    padding: 10px 20px;
+    background-color: lightgreen; /* For success message (change as needed) */
+    border: 1px solid green;
+    color: green;
+    border-radius: 4px;
+}
+
+.msg-box-false2 {
+    position: fixed; /* Fix the element to the viewport */
+    top: 10px; /* Distance from the top of the screen */
+    left: 50%; /* Horizontally center the element */
+    transform: translateX(-50%); /* Offset to center the element */
+    z-index: 1000; /* Make sure it's on top of other elements */
+    padding: 10px 20px;
+    background-color: #ffbaba; /* For success message (change as needed) */
+    border: 1px solid red;
+    color: red;
+    border-radius: 4px;
+    /*padding-top: 7px;
+    padding-right: 7px;
+    padding-left: 7px;
+    border: solid 1px red;
+    color: red;
+    height: 40px;
+    background-color: #ffbaba;
+    border-radius: 4px;
+    text-align: center;
+    margin-left: 50px;*/
 }
