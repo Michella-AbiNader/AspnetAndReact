@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserContext from "../Components/UserContext";
-import { getCart } from '../Services/CartServices'; 
+import { getCart, updateCart, deleteCart, clearCart } from '../Services/CartServices'; 
 
 function Cart() {
     const { user } = useContext(UserContext);
     const [cart, setCart] = useState([]);
     const [total, setTotal] = useState(0); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -14,6 +16,7 @@ function Cart() {
                 console.log(res)
                 setCart(res);
                 calculateTotal(res); 
+                console.log(res)
             } catch (error) {
                 console.log(error);
             }
@@ -28,7 +31,7 @@ function Cart() {
     };
 
     // Handle quantity increment/decrement
-    const handleQuantityChange = async (productId, quantityChange) => {
+    const handleQuantityChange = async (cartId, productId, quantityChange) => {
         const updatedCart = cart.map(item => {
             if (item.product_id === productId) {
                 const newQuantity = Number(item.quantity) + quantityChange;
@@ -41,12 +44,15 @@ function Cart() {
         setCart([...updatedCart]);
         calculateTotal(updatedCart);
         // Update cart item quantity on the server
-        //await updateCartItem(user.id, productId, updatedCart.find(item => item.product_id === productId).quantity);
+        let quantity = updatedCart.find(item => item.product_id === productId).quantity
+        quantity = Number(quantity)
+        productId = Number(productId)
+        await updateCart(cartId, quantity);
     };
 
     // Handle removal of an item from the cart
-    const handleRemoveItem = async (productId) => {
-        //await removeFromCart(user.id, productId); // Remove item from cart on the server
+    const handleRemoveItem = async (cartId, productId) => {
+        await deleteCart(cartId); // Remove item from cart on the server
         const updatedCart = cart.filter(item => item.product_id !== productId);
         setCart(updatedCart);
         calculateTotal(updatedCart);
@@ -54,13 +60,13 @@ function Cart() {
 
     // Handle clearing the entire cart
     const handleClearCart = async () => {
-       // await clearCart(user.id); // Clear the cart on the server
+        await clearCart(user.id); // Clear the cart on the server
         setCart([]);
         setTotal(0); // Reset total
     };
 
     const handleCheckout = async () => {
-        // Handle checkout
+        navigate("/app/checkout")
 
     };
 
@@ -71,7 +77,7 @@ function Cart() {
                 <>
                     <ul className="cart-items">
                         {cart.map(item => (
-                            <li key={item.product_id} className="cart-item">
+                            <li key={item.id} className="cart-item">
                                 <img src={item.image_url} alt={item.product_name} className="cart-item-image" />
                                 <div className="cart-item-info">
                                     <p className="cart-item-name">{item.name}</p>
@@ -81,12 +87,12 @@ function Cart() {
                                     
                                         <div className="cart-item-quantity">
                                             
-                                        <button onClick={() => handleQuantityChange(item.product_id, -1)}>-</button>
+                                        <button onClick={() => handleQuantityChange(item.id, item.product_id, -1)}>-</button>
                                         <span>{item.quantity}</span>
-                                        <button onClick={() => handleQuantityChange(item.product_id, 1)}>+</button>
+                                        <button onClick={() => handleQuantityChange(item.id, item.product_id, 1)}>+</button>
                                         </div>
                                     </div>
-                                    <button className="clear-cart" onClick={() => handleRemoveItem(item.product_id)}>Remove</button>
+                                    <button className="clear-cart" onClick={() => handleRemoveItem(item.id, item.product_id)}>Remove</button>
                                 </div>
                             </li>
                         ))}

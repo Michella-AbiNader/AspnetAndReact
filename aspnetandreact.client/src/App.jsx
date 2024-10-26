@@ -20,6 +20,8 @@ import ShopAdminOrders from './Pages/ShopAdminOrders'
 import ShopProducts from './Pages/ShopProducts'
 import UserBrowseProducts from './Pages/UserBrowseProducts';
 import UserViewProduct from './/Pages/UserViewProduct'
+import Checkout from './Pages/Checkout';
+import Settings from './Pages/Settings'
 function App() {
     useEffect(() => {
         // Check for theme_color in localStorage and apply it
@@ -54,6 +56,8 @@ function App() {
                         <Route path="/app/products" element={<UserBrowseProducts />} />
                         <Route path="/app/:shopName/:shopId/products" element={<ShopProducts />} />
                         <Route path="/app/:productName/:productId" element={<UserViewProduct />} />
+                        <Route path="/app/checkout" element={<Checkout/>} />
+                        <Route path="/app/settings" element={<Settings/>} />
 
 
             </Routes>

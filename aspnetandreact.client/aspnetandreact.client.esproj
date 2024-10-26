@@ -9,6 +9,10 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="src\Pages\NewFolder\**" />
+    <TypeScriptConfiguration Remove="src\Pages\NewFolder\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="src\Components\EditButton.jsx" />
     <None Remove="src\Components\SystemAdminNavbar.jsx" />
     <None Remove="src\Components\ViewShop.jsx" />

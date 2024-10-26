@@ -14,7 +14,7 @@ namespace AspnetAndReact.Server.Controllers
         [HttpGet]
         public string Get(int userId)
         {
-            string query = "SELECT cart.product_id, products.name, products.price, products.image_url, cart.quantity " +
+            string query = "SELECT cart.id, cart.product_id, products.name, products.price, products.image_url, cart.quantity " +
                 "FROM products JOIN cart ON cart.product_id = products.id WHERE cart.user_id = @userId";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@userId", userId);
@@ -65,12 +65,12 @@ namespace AspnetAndReact.Server.Controllers
         [HttpPut]
         public string Put(int id, [FromBody] int quantity)
         {
-            string query = "UPDATE cart SET quantity = quantity + @quantityAdded WHERE id = @id;";
+            string query = "UPDATE cart SET quantity = @quantity WHERE id = @id;";
 
             SqlParameter[] sqlParameters = new SqlParameter[]
                {
                 new SqlParameter("@id", id),
-                new SqlParameter("@quantityAdded", quantity),
+                new SqlParameter("@quantity", quantity),
                };
             SqlOperations sql = new SqlOperations();
             bool result = sql.executeSql(query, sqlParameters);
@@ -103,6 +103,19 @@ namespace AspnetAndReact.Server.Controllers
             if (result)
             {
                 return "Item removed from cart successfully!";
+            }
+            return "Wrong Id provided";
+        }
+        [HttpDelete]
+        public string ClearCart(int userId)
+        {
+            string query = "DELETE FROM cart WHERE user_id = @userId";
+            SqlOperations sql = new SqlOperations();
+            SqlParameter sqlParam = new SqlParameter("@userId", userId);
+            bool result = sql.executeSql(query, sqlParam);
+            if (result)
+            {
+                return "Cart cleared successfully!";
             }
             return "Wrong Id provided";
         }

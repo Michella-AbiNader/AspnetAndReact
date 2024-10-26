@@ -30,10 +30,10 @@ export const upsertCart = async (cart) => {
     }
 };
 
-export const updateCart = async (quantity) => {
+export const updateCart = async (id, UpdatedQuantity) => {
     try {
-        const response = await axios.post(`${API_URL}/Cart/Put`, {
-            quantity: quantity
+        const response = await axios.put(`${API_URL}/Cart/Put?id=${id}`, UpdatedQuantity, {
+            headers: { 'Content-Type': 'application/json' }
         });
         return response.data;
     } catch (error) {
@@ -44,6 +44,15 @@ export const updateCart = async (quantity) => {
 export const deleteCart = async (id) => {
     try {
         const response = await axios.delete(`${API_URL}/Cart/Delete?id=${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error deleteing cart:', error);
+        throw error;
+    }
+};
+export const clearCart = async (userId) => {
+    try {
+        const response = await axios.delete(`${API_URL}/Cart/ClearCart?userId=${userId}`);
         return response.data;
     } catch (error) {
         console.error('Error deleteing cart:', error);
