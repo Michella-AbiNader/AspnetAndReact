@@ -14,8 +14,13 @@ function Cart() {
             try {
                 const res = await getCart(user.id); 
                 console.log(res)
-                setCart(res);
-                calculateTotal(res); 
+                if (res == "Cart is empty") {
+                    setCart([]);
+                } else {
+                    setCart(res);
+                    calculateTotal(res); 
+                }
+               
                 console.log(res)
             } catch (error) {
                 console.log(error);

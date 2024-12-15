@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import NavBar from "../Components/NavBar";
 import UserContext from "../Components/UserContext";
-import { getCart } from "../Services/CartServices"; 
+import { getCart, CheckOut } from "../Services/CartServices"; 
+import { useNavigate } from 'react-router-dom';
 import '../Styles/CheckOut.css'; 
 
 function Checkout() {
@@ -10,6 +11,8 @@ function Checkout() {
     const [location, setLocation] = useState("");
     const [total, setTotal] = useState(0);
     const [showConfirmation, setShowConfirmation] = useState(false)
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchCart = async () => {
             try {
@@ -43,14 +46,42 @@ function Checkout() {
         setShowConfirmation(false);
     };
     const handleConfirmCheckOut = async (e) => {
-        //try {
-        //    const response = await checkoutCart(user.id, location); // Assuming this service exists
-        //    alert(response.message);
-        //    // Optionally redirect to a confirmation page
-        //} catch (error) {
-        //    console.error("Checkout error:", error);
-        //    alert("Failed to checkout. Please try again.");
-        //}
+        e.preventDefault()
+        try {
+            // Create an array of promises for each cart item
+            const orderPromises = cartItems.map((item) => {
+                const order = {
+                    user_id: user.id,
+                    product_id: item.product_id,
+                    shop_id: item.shop_id,
+                    quantity: item.quantity,
+                    location: location,
+                    date_order: new Date().toISOString(), 
+                    status: "Pending"
+                };
+
+                return CheckOut(order); // Call the CheckOut function for each item
+            });
+
+            // Wait for all promises to resolve
+            const responses = await Promise.all(orderPromises);
+
+            // Check responses for success/failure messages
+            //const successfulOrders = responses.filter((res) =>
+            //    res.includes("successfully")
+            //);
+            //const failedOrders = responses.length - successfulOrders.length;
+
+            //alert(
+            //    `Checkout complete! ${successfulOrders.length} items added successfully, ${failedOrders} failed.`
+            //);
+
+            setCartItems([]);
+            navigate("/app/shops"); 
+        } catch (error) {
+            console.error("Checkout error:", error);
+            alert("Failed to checkout. Please try again.");
+        }
     }
     return (
         <>

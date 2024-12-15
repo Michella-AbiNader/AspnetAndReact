@@ -14,7 +14,7 @@ namespace AspnetAndReact.Server.Controllers
         [HttpGet]
         public string Get(int userId)
         {
-            string query = "SELECT cart.id, cart.product_id, products.name, products.price, products.image_url, cart.quantity " +
+            string query = "SELECT cart.id, cart.product_id, cart.shop_id, products.name, products.price, products.image_url, cart.quantity " +
                 "FROM products JOIN cart ON cart.product_id = products.id WHERE cart.user_id = @userId";
             SqlOperations sql = new SqlOperations();
             SqlParameter sqlParam = new SqlParameter("@userId", userId);

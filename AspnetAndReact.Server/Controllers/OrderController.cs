@@ -71,6 +71,18 @@ namespace AspnetAndReact.Server.Controllers
             {
                 return "Order already exists";
             }
+             query = "DELETE FROM cart WHERE user_id = @user_id And product_id = @product_id" ;
+             sql = new SqlOperations();
+            sqlParameters = new SqlParameter[]
+            {
+               new SqlParameter("@user_id", order.UserId),
+               new SqlParameter("@product_id", order.ProductId),
+            };
+            result = sql.executeSql(query, sqlParameters);
+            if (!result)
+            {
+                return "Order added successfully, but failed to remove from the cart.";
+            }
             return "Order added successfully!";
         }
         [HttpPut]

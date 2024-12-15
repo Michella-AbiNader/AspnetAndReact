@@ -59,3 +59,20 @@ export const clearCart = async (userId) => {
         throw error;
     }
 };
+export const CheckOut = async (order) => {
+    try {
+        const response = await axios.post(`${API_URL}/Order/Post`, {
+            UserId: order.user_id,
+            ProductId: order.product_id,
+            ShopId: order.shop_id,
+            Quantity: order.quantity,
+            Location: order.location,
+            DateOfOrder: order.date_order,
+            Status: order.status
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error creating cart:', error);
+        throw error;
+    }
+};
