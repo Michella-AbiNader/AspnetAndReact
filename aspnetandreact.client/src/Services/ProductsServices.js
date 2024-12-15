@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define the base URL of your API
-const API_URL = 'https://localhost:7031'; // Adjust the port and URL if needed
+const API_URL = 'https://localhost:44346'; // Adjust the port and URL if needed
 
 export const getProductsByShopId = async (shopId) => {
     try {

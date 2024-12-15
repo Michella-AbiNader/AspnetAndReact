@@ -54,7 +54,7 @@ function Register() {
 			res = await registerUser({ "Username": username, "FirstName": firstname, "LastName": lastname, "Password": password, "Type": "user" });
 			if (res.token !== "") {
 				setUser({ id: res.id, username: username, token: res.token, type: "user" })
-				navigate('/app')
+				navigate('/app/shops')
 			}
 		} catch (error) {
 			console.log(error)
@@ -101,7 +101,7 @@ function Register() {
 					{response.token == "" ? <p className="error"> {response.res}</p> : ""}
 					<button className="singupBtn" type="submit">Sign up</button>
 					<p>Already have an account?
-						<a className="link" onClick={handleRegisterClick}> Login</a>
+						<a className="link" onClick={handleSubmit}> Login</a>
 					</p>
 				</form>
 			</div>

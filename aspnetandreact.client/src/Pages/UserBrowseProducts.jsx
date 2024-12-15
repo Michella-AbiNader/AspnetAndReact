@@ -115,7 +115,7 @@ function UserBrowseProducts() {
                   }
                   <input
                       type="text"
-                      placeholder="Search Shops"
+                      placeholder="Search Products"
                       value={searchQuery}
                       onChange={handleSearchChange}
                       className="Search-Bar"
